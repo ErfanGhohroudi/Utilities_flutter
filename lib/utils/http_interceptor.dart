@@ -137,8 +137,8 @@ extension HTTP on Response<dynamic> {
 void showRetryDialog({
   required BuildContext context,
   required VoidCallback retryCallback,
-  bool? isTimeOut,
-  bool? barrierDismissible,
+  bool isTimeOut = false,
+  bool barrierDismissible = false,
   Response<dynamic>? response,
 }) {
   String getTitleText({required Response<dynamic> response}) {
@@ -174,7 +174,7 @@ void showRetryDialog({
             child: Column(
               children: [
                 const UImage("lib/assets/files/error.lottie", size: 100),
-                if (isTimeOut ?? false)
+                if (isTimeOut)
                   const Text(
                     "لطفا وضعیت اینترنت خود را بررسی کنید",
                     textAlign: TextAlign.center,
@@ -204,7 +204,7 @@ void showRetryDialog({
         ),
       ),
       useSafeArea: true,
-      barrierDismissible: barrierDismissible ?? false,
+      barrierDismissible: barrierDismissible,
     );
   }
 }
