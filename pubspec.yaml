@@ -83,3 +83,6 @@ flutter:
     - family: IranSansFaNum
       fonts:
         - asset: lib/assets/fonts/IranSansFaNum.ttf
+    - family: IranSans
+      fonts:
+        - asset: lib/assets/fonts/IranSans.ttf

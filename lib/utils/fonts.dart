@@ -7,6 +7,7 @@ abstract class UFonts extends TextStyle {
   static const TextStyle sahel = TextStyle(fontFamily: 'Sahel', package: "u");
   static const TextStyle yekan = TextStyle(fontFamily: 'Yekan', package: "u");
   static const TextStyle iranSansFaNum = TextStyle(fontFamily: 'IranSansFaNum', package: "u");
+  static const TextStyle iranSans = TextStyle(fontFamily: 'IranSans', package: "u");
 
   static TextTheme vazirTextTheme = const TextTheme(
     displayLarge: UFonts.vazir,
@@ -114,5 +115,23 @@ abstract class UFonts extends TextStyle {
     labelLarge: UFonts.iranSansFaNum,
     labelMedium: UFonts.iranSansFaNum,
     labelSmall: UFonts.iranSansFaNum,
+  );
+
+  static TextTheme iranSansTextTheme = const TextTheme(
+    displayLarge: UFonts.iranSans,
+    displayMedium: UFonts.iranSans,
+    displaySmall: UFonts.iranSans,
+    headlineLarge: UFonts.iranSans,
+    headlineMedium: UFonts.iranSans,
+    headlineSmall: UFonts.iranSans,
+    titleLarge: UFonts.iranSans,
+    titleMedium: UFonts.iranSans,
+    titleSmall: UFonts.iranSans,
+    bodyLarge: UFonts.iranSans,
+    bodyMedium: UFonts.iranSans,
+    bodySmall: UFonts.iranSans,
+    labelLarge: UFonts.iranSans,
+    labelMedium: UFonts.iranSans,
+    labelSmall: UFonts.iranSans,
   );
 }
