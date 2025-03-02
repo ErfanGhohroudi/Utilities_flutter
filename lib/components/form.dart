@@ -263,6 +263,7 @@ class UElevatedButton extends StatelessWidget {
   const UElevatedButton({
     super.key,
     this.title,
+    this.titleColor,
     this.titleWidget,
     this.onTap,
     this.icon,
@@ -275,6 +276,7 @@ class UElevatedButton extends StatelessWidget {
   });
 
   final String? title;
+  final Color? titleColor;
   final Widget? titleWidget;
   final VoidCallback? onTap;
   final IconData? icon;
@@ -287,31 +289,35 @@ class UElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-    style: ButtonStyle(
-      textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
-      backgroundColor: WidgetStateProperty.all(backgroundColor),
-      shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 12),
+        style: ButtonStyle(
+          textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
+          backgroundColor: WidgetStateProperty.all(backgroundColor),
+          shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 12),
+            ),
+          ),
         ),
-      ),
-    ),
-    onPressed: onTap,
-    child: Container(
-      padding: EdgeInsets.symmetric(horizontal: horizontalPadding?? 12),
-      constraints: BoxConstraints(
-        minWidth: width ?? 70,
-        maxWidth: width ?? context.width,
-        minHeight: height ?? 40,
-        maxHeight: height ?? 40,
-      ),
-      child: Center(
-        widthFactor: 1,
-        heightFactor: 1,
-        child: titleWidget ?? Text(title ?? '', textAlign: TextAlign.center),
-      ),
-    ),
-  );
+        onPressed: onTap,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 12),
+          constraints: BoxConstraints(
+            minWidth: width ?? 70,
+            maxWidth: width ?? context.width,
+            minHeight: height ?? 40,
+            maxHeight: height ?? 40,
+          ),
+          child: Center(
+            widthFactor: 1,
+            heightFactor: 1,
+            child: titleWidget ??
+                Text(
+                  title ?? '',
+                  textAlign: TextAlign.center,
+                ).bodyMedium(color: titleColor),
+          ),
+        ),
+      );
 }
 
 class UOutlinedButton extends StatelessWidget {
