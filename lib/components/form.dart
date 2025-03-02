@@ -295,45 +295,45 @@ class UElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-        style: ButtonStyle(
-          textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
-          backgroundColor: WidgetStateProperty.all(backgroundColor?? navigatorKey.currentContext!.theme.primaryColor),
-          shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 12),
-            ),
-          ),
+    style: ButtonStyle(
+      textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
+      backgroundColor: WidgetStateProperty.all(backgroundColor?? navigatorKey.currentContext!.theme.primaryColor),
+      padding: WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: horizontalPadding?? 12)),
+      shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 12),
         ),
-        onPressed: onTap,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 0),
-          constraints: BoxConstraints(
-            minWidth: width ?? 70,
-            maxWidth: width ?? context.width,
-            minHeight: height ?? 40,
-            maxHeight: height ?? 40,
+      ),
+    ),
+    onPressed: onTap,
+    child: Container(
+      constraints: BoxConstraints(
+        minWidth: width ?? 100,
+        maxWidth: width ?? context.width,
+        minHeight: height ?? 40,
+        maxHeight: height ?? 40,
+      ),
+      child: Center(
+        widthFactor: 1,
+        heightFactor: 1,
+        child: isLoading
+            ? SizedBox(
+          width: 15,
+          height: 15,
+          child: CircularProgressIndicator(
+            color: progressIndicatorColor?? Colors.white,
+            strokeCap: StrokeCap.round,
+            strokeWidth: progressIndicatorStrokeWidth?? 3.0,
           ),
-          child: Center(
-            widthFactor: 1,
-            heightFactor: 1,
-            child: isLoading
-                ? SizedBox(
-                    width: 15,
-                    height: 15,
-                    child: CircularProgressIndicator(
-                      color: progressIndicatorColor?? Colors.white,
-                      strokeCap: StrokeCap.round,
-                      strokeWidth: progressIndicatorStrokeWidth?? 3.0,
-                    ),
-                  )
-                : titleWidget ??
-                    Text(
-                      title ?? '',
-                      textAlign: TextAlign.center,
-                    ).bodyMedium(color: titleColor?? Colors.white),
-          ),
-        ),
-      );
+        )
+            : titleWidget ??
+            Text(
+              title ?? '',
+              textAlign: TextAlign.center,
+            ).bodyMedium(color: titleColor?? Colors.white),
+      ),
+    ),
+  );
 }
 
 class UOutlinedButton extends StatelessWidget {
