@@ -1,7 +1,7 @@
 import 'package:u/utilities.dart';
 
-class UTextField extends StatefulWidget {
-  const UTextField({
+class UTextFormField extends StatefulWidget {
+  const UTextFormField({
     super.key,
     this.labelText,
     this.labelStyle,
@@ -69,10 +69,10 @@ class UTextField extends StatefulWidget {
   final TextDirection? textDirection;
 
   @override
-  State<UTextField> createState() => _UTextFieldState();
+  State<UTextFormField> createState() => _UTextFormFieldState();
 }
 
-class _UTextFieldState extends State<UTextField> {
+class _UTextFormFieldState extends State<UTextFormField> {
   bool obscure = false;
 
   @override
@@ -196,7 +196,7 @@ class _UTextFieldPersianDatePickerState extends State<UTextFieldPersianDatePicke
   }
 
   @override
-  Widget build(BuildContext context) => UTextField(
+  Widget build(BuildContext context) => UTextFormField(
         controller: widget.controller,
         prefix: widget.prefix,
         suffix: widget.suffix,
@@ -432,7 +432,7 @@ class UTextFieldTypeAhead<T> extends StatelessWidget {
           TypeAheadField<T>(
             hideKeyboardOnDrag: hideKeyboard,
             suggestionsCallback: suggestionsCallback,
-            builder: (final BuildContext _, final TextEditingController __, final FocusNode ___) => UTextField(
+            builder: (final BuildContext _, final TextEditingController __, final FocusNode ___) => UTextFormField(
               onTap: onTap,
               validator: validator,
               prefix: prefix,

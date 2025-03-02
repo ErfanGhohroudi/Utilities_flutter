@@ -256,7 +256,7 @@ abstract class UFile {
                         ),
                       Column(
                         children: <Widget>[
-                          UTextField(
+                          UTextFormField(
                             labelText: "عنوان",
                             initialValue: data.jsonDetail?.title,
                             onChanged: (final String value) {
@@ -264,7 +264,7 @@ abstract class UFile {
                               onFileEdited(data);
                             },
                           ).pAll(8),
-                          UTextField(
+                          UTextFormField(
                             labelText: "توضیحات",
                             initialValue: data.jsonDetail?.description,
                             onChanged: (final String value) {
@@ -274,7 +274,7 @@ abstract class UFile {
                           ).pAll(8),
                           Row(
                             children: <Widget>[
-                              UTextField(
+                              UTextFormField(
                                 labelText: "لینک ۱",
                                 initialValue: data.jsonDetail?.link1,
                                 onChanged: (final String value) {
@@ -282,7 +282,7 @@ abstract class UFile {
                                   onFileEdited(data);
                                 },
                               ).pAll(8).expanded(),
-                              UTextField(
+                              UTextFormField(
                                 labelText: "لینک ۲",
                                 initialValue: data.jsonDetail?.link2,
                                 onChanged: (final String value) {
