@@ -270,7 +270,8 @@ class UElevatedButton extends StatelessWidget {
     this.height,
     this.textStyle,
     this.backgroundColor,
-    this.padding,
+    this.horizontalPadding,
+    this.borderRadius,
   });
 
   final String? title;
@@ -281,22 +282,36 @@ class UElevatedButton extends StatelessWidget {
   final double? height;
   final TextStyle? textStyle;
   final Color? backgroundColor;
-  final EdgeInsets? padding;
+  final double? horizontalPadding;
+  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-        style: ButtonStyle(
-          textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
-          backgroundColor: WidgetStateProperty.all(backgroundColor),
-          padding: WidgetStateProperty.all(padding),
+    style: ButtonStyle(
+      textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
+      backgroundColor: WidgetStateProperty.all(backgroundColor),
+      shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 12),
         ),
-        onPressed: onTap,
-        child: SizedBox(
-          height: height,
-          width: width ?? MediaQuery.sizeOf(navigatorKey.currentContext!).width,
-          child: Center(child: titleWidget ?? Text(title ?? '', textAlign: TextAlign.center)),
-        ),
-      );
+      ),
+    ),
+    onPressed: onTap,
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding?? 12),
+      constraints: BoxConstraints(
+        minWidth: width ?? 70,
+        maxWidth: width ?? context.width,
+        minHeight: height ?? 40,
+        maxHeight: height ?? 40,
+      ),
+      child: Center(
+        widthFactor: 1,
+        heightFactor: 1,
+        child: titleWidget ?? Text(title ?? '', textAlign: TextAlign.center),
+      ),
+    ),
+  );
 }
 
 class UOutlinedButton extends StatelessWidget {
