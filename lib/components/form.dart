@@ -297,7 +297,7 @@ class UElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) => ElevatedButton(
         style: ButtonStyle(
           textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
-          backgroundColor: WidgetStateProperty.all(backgroundColor),
+          backgroundColor: WidgetStateProperty.all(backgroundColor?? navigatorKey.currentContext!.theme.primaryColor),
           shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius ?? 12),
