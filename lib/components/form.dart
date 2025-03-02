@@ -95,9 +95,9 @@ class _UTextFormFieldState extends State<UTextFormField> {
               : null),
       inputFormatters: widget.formatters ??
           [
-            if (widget.keyboardType == TextInputType.visiblePassword) FilteringTextInputFormatter.allow(RegExp(r'^[a-zA-Z0-9]*$')),
-            if (widget.keyboardType == TextInputType.number) FilteringTextInputFormatter.allow(RegExp(r'^[0-9]')),
-            if (widget.keyboardType == TextInputType.phone) FilteringTextInputFormatter.allow(RegExp(r'^[0-9]')),
+            if (widget.keyboardType == TextInputType.visiblePassword) FilteringTextInputFormatter.deny(RegExp(r'[\u0600-\u06FF]')), // بلاک کردن حروف فارسی و عربی
+            if (widget.keyboardType == TextInputType.number) FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+            if (widget.keyboardType == TextInputType.phone) FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
           ],
       style: TextStyle(fontSize: widget.fontSize),
       maxLength: widget.maxLength,
