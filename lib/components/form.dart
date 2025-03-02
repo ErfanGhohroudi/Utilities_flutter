@@ -330,7 +330,7 @@ class UElevatedButton extends StatelessWidget {
                     Text(
                       title ?? '',
                       textAlign: TextAlign.center,
-                    ).bodyMedium(color: titleColor),
+                    ).bodyMedium(color: titleColor?? Colors.white),
           ),
         ),
       );
