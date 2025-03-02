@@ -3,8 +3,8 @@ import 'package:u/utilities.dart';
 class UTextField extends StatefulWidget {
   const UTextField({
     super.key,
-    this.text,
     this.labelText,
+    this.labelStyle,
     this.hintText,
     this.contentPadding,
     this.fontSize,
@@ -15,37 +15,46 @@ class UTextField extends StatefulWidget {
     this.suffix,
     this.onSave,
     this.initialValue,
+    this.helperText,
+    this.helperStyle,
+    this.floatingLabelStyle,
     this.textHeight,
     this.onChanged,
     this.onFieldSubmitted,
     this.maxLength,
     this.formatters,
-    this.autoFillHints,
     this.readOnly = false,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
-    this.lines = 1,
-    this.hasClearButton = false,
+    this.obscureIconColor,
+    this.minLines = 1,
+    this.maxLines,
     this.required = false,
     this.isDense = false,
     this.textAlign = TextAlign.start,
+    this.showCounter = false,
+    this.textDirection,
   });
 
   final bool obscureText;
-  final bool hasClearButton;
+  final Color? obscureIconColor;
   final bool required;
   final bool isDense;
   final bool readOnly;
-  final String? text;
   final String? labelText;
+  final TextStyle? labelStyle;
   final String? hintText;
   final String? initialValue;
+  final String? helperText;
+  final TextStyle? helperStyle;
+  final TextStyle? floatingLabelStyle;
   final String? Function(String?)? validator;
   final double? fontSize;
   final double? textHeight;
   final TextEditingController? controller;
+  final int minLines;
+  final int? maxLines;
   final TextInputType keyboardType;
-  final int lines;
   final int? maxLength;
   final EdgeInsetsGeometry? contentPadding;
   final VoidCallback? onTap;
@@ -56,7 +65,8 @@ class UTextField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onFieldSubmitted;
   final List<TextInputFormatter>? formatters;
-  final List<String>? autoFillHints;
+  final bool showCounter;
+  final TextDirection? textDirection;
 
   @override
   State<UTextField> createState() => _UTextFieldState();
@@ -72,58 +82,68 @@ class _UTextFieldState extends State<UTextField> {
   }
 
   @override
-  Widget build(final BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          if (widget.text != null)
-            UIconTextHorizontal(
-              leading: Text(widget.text!, style: Theme.of(context).textTheme.titleSmall),
-              trailing: widget.required ? const Text("*").bodyMedium(color: Theme.of(context).colorScheme.error) : const SizedBox(),
-            ).pSymmetric(vertical: 8),
-          TextFormField(
-            autofillHints: widget.autoFillHints,
-            textDirection: widget.keyboardType == TextInputType.number ? TextDirection.ltr : null,
-            inputFormatters: widget.formatters,
-            style: TextStyle(fontSize: widget.fontSize),
-            maxLength: widget.maxLength,
-            onChanged: widget.onChanged,
-            readOnly: widget.readOnly,
-            initialValue: widget.initialValue,
-            textAlign: widget.textAlign,
-            onSaved: widget.onSave,
-            onTap: widget.onTap,
-            controller: widget.controller,
-            keyboardType: widget.keyboardType,
-            obscureText: obscure,
-            validator: widget.validator,
-            minLines: widget.lines,
-            onFieldSubmitted: widget.onFieldSubmitted,
-            maxLines: widget.lines == 1 ? 1 : 20,
-            decoration: InputDecoration(
-              labelText: widget.labelText,
-              isDense: widget.isDense,
-              helperStyle: const TextStyle(fontSize: 0),
-              hintText: widget.hintText,
-              contentPadding: widget.contentPadding ?? const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              suffixIcon: widget.obscureText
-                  ? IconButton(
-                      splashRadius: 1,
-                      onPressed: () => setState(() => obscure = !obscure),
-                      icon: obscure ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
-                    )
-                  : widget.suffix,
-              prefixIcon: widget.prefix,
-            ),
-          ),
-        ],
-      );
+  Widget build(BuildContext context) {
+    return TextFormField(
+      enabled: true,
+      textDirection: widget.textDirection ??
+          (widget.keyboardType == TextInputType.number ||
+              widget.keyboardType == TextInputType.visiblePassword ||
+              widget.keyboardType == TextInputType.emailAddress ||
+              widget.keyboardType == TextInputType.url ||
+              widget.keyboardType == TextInputType.phone
+              ? TextDirection.ltr
+              : null),
+      inputFormatters: widget.formatters ??
+          [
+            if (widget.keyboardType == TextInputType.visiblePassword) FilteringTextInputFormatter.allow(RegExp(r'^[a-zA-Z0-9]*$')),
+            if (widget.keyboardType == TextInputType.number) FilteringTextInputFormatter.allow(RegExp(r'^[0-9]')),
+            if (widget.keyboardType == TextInputType.phone) FilteringTextInputFormatter.allow(RegExp(r'^[0-9]')),
+          ],
+      style: TextStyle(fontSize: widget.fontSize),
+      maxLength: widget.maxLength,
+      onChanged: widget.onChanged,
+      readOnly: widget.readOnly,
+      initialValue: widget.initialValue,
+      textAlign: widget.textAlign,
+      onSaved: widget.onSave,
+      onTap: widget.onTap,
+      controller: widget.controller,
+      keyboardType: widget.keyboardType,
+      obscureText: obscure,
+      validator: widget.validator,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      minLines: widget.minLines,
+      maxLines: widget.maxLines ?? (widget.minLines == 1 ? 1 : 20),
+      decoration: InputDecoration(
+        labelText: widget.labelText != null ? "${widget.labelText}${widget.required ? '*' : ''}" : null,
+        labelStyle: widget.labelStyle ?? context.textTheme.bodyMedium!.copyWith(color: context.theme.hintColor),
+        floatingLabelStyle: widget.floatingLabelStyle ?? context.textTheme.bodyLarge!,
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        isDense: widget.isDense,
+        helperStyle: widget.helperStyle ?? context.textTheme.bodySmall,
+        helperText: widget.helperText,
+        hintText: widget.hintText,
+        contentPadding: widget.contentPadding,
+        counter: widget.showCounter ? null : SizedBox(),
+        suffixIcon: widget.obscureText
+            ? IconButton(
+          splashRadius: 1,
+          onPressed: () => setState(() => obscure = !obscure),
+          icon: obscure
+              ? Icon(Icons.visibility, color: widget.obscureIconColor ?? context.theme.hintColor)
+              : Icon(Icons.visibility_off, color: widget.obscureIconColor ?? context.theme.hintColor),
+        )
+            : widget.suffix,
+        prefixIcon: widget.prefix,
+      ),
+    );
+  }
 }
 
 class UTextFieldPersianDatePicker extends StatefulWidget {
   const UTextFieldPersianDatePicker({
     super.key,
     required this.onChange,
-    this.text,
     this.fontSize,
     this.hintText,
     this.labelText,
@@ -144,7 +164,6 @@ class UTextFieldPersianDatePicker extends StatefulWidget {
   });
 
   final Function(DateTime, Jalali) onChange;
-  final String? text;
   final double? fontSize;
   final String? hintText;
   final String? labelText;
@@ -179,7 +198,6 @@ class _UTextFieldPersianDatePickerState extends State<UTextFieldPersianDatePicke
   @override
   Widget build(BuildContext context) => UTextField(
         controller: widget.controller,
-        text: widget.text,
         prefix: widget.prefix,
         suffix: widget.suffix,
         labelText: widget.labelText,
@@ -379,7 +397,6 @@ class UTextFieldTypeAhead<T> extends StatelessWidget {
     required this.onSuggestionSelected,
     required this.suggestionsCallback,
     this.itemBuilder,
-    this.text,
     this.prefix,
     this.onTap,
     this.suffix,
@@ -396,7 +413,6 @@ class UTextFieldTypeAhead<T> extends StatelessWidget {
   final void Function(T) onSuggestionSelected;
   final FutureOr<List<T>?> Function(String) suggestionsCallback;
   final Widget Function(BuildContext context, T itemData)? itemBuilder;
-  final String? text;
   final Widget? prefix;
   final VoidCallback? onTap;
   final bool isDense;
@@ -423,7 +439,6 @@ class UTextFieldTypeAhead<T> extends StatelessWidget {
               isDense: isDense,
               contentPadding: contentPadding,
               onChanged: onChanged,
-              text: text,
               hintText: hintText,
               labelText: labelText,
               suffix: suffix,
