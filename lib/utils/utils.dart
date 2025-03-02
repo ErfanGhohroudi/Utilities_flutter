@@ -45,10 +45,11 @@ FormFieldValidator<String> validateEmail({
 FormFieldValidator<String> validateNumber({
   final String requiredMessage = "مقدار وارد شده صحیح نیست",
   final String notMobileMessage = "شماره موبایل وارد شده صحیح نیست",
+  final int minLength = 11,
 }) =>
-    (final String? value) {
+        (final String? value) {
       if (value!.isEmpty) return requiredMessage;
-      if (!GetUtils.isNumericOnly(value.englishNumber())) return notMobileMessage;
+      if (!GetUtils.isNumericOnly(value.englishNumber()) || value.length < minLength || !value.startsWith("0")) return notMobileMessage;
       return null;
     };
 
