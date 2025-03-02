@@ -306,7 +306,7 @@ class UElevatedButton extends StatelessWidget {
         ),
         onPressed: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 12),
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 0),
           constraints: BoxConstraints(
             minWidth: width ?? 70,
             maxWidth: width ?? context.width,
