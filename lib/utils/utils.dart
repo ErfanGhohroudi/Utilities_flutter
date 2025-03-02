@@ -16,16 +16,18 @@ void validateForm({required final GlobalKey<FormState> key, required final VoidC
 bool hasMatch(final String? value, final String pattern) => (value == null) ? false : RegExp(pattern).hasMatch(value);
 
 FormFieldValidator<String> validateMinLength(
-  final int minLength, {
-  final String minLengthMessage = "مقدار وارد شده صحیح نیست",
-}) =>
-    (final String? value) {
-      if (value!.length < minLength) return minLengthMessage;
+    final int minLength, {
+      final String requiredMessage = "فیلد الزامی است",
+      final String minLengthMessage = "مقدار وارد شده صحیح نیست",
+    }) =>
+        (final String? value) {
+      if (value!.isEmpty) return requiredMessage;
+      if (value.length < minLength) return minLengthMessage;
       return null;
     };
 
 FormFieldValidator<String> validateNotEmpty({
-  final String requiredMessage = "مقدار وارد شده صحیح نیست",
+  final String requiredMessage = "فیلد الزامی است",
 }) =>
     (final String? value) {
       if (value!.isEmpty) return requiredMessage;
@@ -33,7 +35,7 @@ FormFieldValidator<String> validateNotEmpty({
     };
 
 FormFieldValidator<String> validateEmail({
-  final String requiredMessage = "مقدار وارد شده صحیح نیست",
+  final String requiredMessage = "فیلد الزامی است",
   final String notEmailMessage = "ایمیل وارد شده صحیح نیست",
 }) =>
     (final String? value) {
@@ -43,7 +45,7 @@ FormFieldValidator<String> validateEmail({
     };
 
 FormFieldValidator<String> validateNumber({
-  final String requiredMessage = "مقدار وارد شده صحیح نیست",
+  final String requiredMessage = "فیلد الزامی است",
   final String notMobileMessage = "شماره موبایل وارد شده صحیح نیست",
   final int minLength = 11,
 }) =>
