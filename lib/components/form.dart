@@ -264,7 +264,10 @@ class UElevatedButton extends StatelessWidget {
     super.key,
     this.title,
     this.titleColor,
+    this.progressIndicatorColor,
+    this.progressIndicatorStrokeWidth,
     this.titleWidget,
+    this.isLoading = false,
     this.onTap,
     this.icon,
     this.width,
@@ -277,7 +280,10 @@ class UElevatedButton extends StatelessWidget {
 
   final String? title;
   final Color? titleColor;
+  final Color? progressIndicatorColor;
+  final double? progressIndicatorStrokeWidth;
   final Widget? titleWidget;
+  final bool isLoading;
   final VoidCallback? onTap;
   final IconData? icon;
   final double? width;
@@ -310,11 +316,21 @@ class UElevatedButton extends StatelessWidget {
           child: Center(
             widthFactor: 1,
             heightFactor: 1,
-            child: titleWidget ??
-                Text(
-                  title ?? '',
-                  textAlign: TextAlign.center,
-                ).bodyMedium(color: titleColor),
+            child: isLoading
+                ? SizedBox(
+                    width: 15,
+                    height: 15,
+                    child: CircularProgressIndicator(
+                      color: progressIndicatorColor?? Colors.white,
+                      strokeCap: StrokeCap.round,
+                      strokeWidth: progressIndicatorStrokeWidth?? 3.0,
+                    ),
+                  )
+                : titleWidget ??
+                    Text(
+                      title ?? '',
+                      textAlign: TextAlign.center,
+                    ).bodyMedium(color: titleColor),
           ),
         ),
       );
