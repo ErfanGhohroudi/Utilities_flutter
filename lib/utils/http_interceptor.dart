@@ -13,7 +13,7 @@ Future<void> httpRequest({
   final Map<String, String>? headers,
   final bool? withLoading,
   final Duration timeout = const Duration(seconds: 10),
-  final Future<void> Function(Response<dynamic> response)? additionalActionAfterReceiveResponse,
+  final Future<void>? Function(Response<dynamic> response)? additionalActionAfterReceiveResponse,
   final DateTime? cacheExpireDate,
 }) async {
   Response<dynamic> response = const Response<dynamic>();
