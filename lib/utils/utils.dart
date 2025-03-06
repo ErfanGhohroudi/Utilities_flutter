@@ -16,20 +16,20 @@ void validateForm({required final GlobalKey<FormState> key, required final VoidC
 bool hasMatch(final String? value, final String pattern) => (value == null) ? false : RegExp(pattern).hasMatch(value);
 
 FormFieldValidator<String> validateMinLength(
-    final int minLength, {
-      final String requiredMessage = "فیلد الزامی است",
-      final String minLengthMessage = "مقدار وارد شده صحیح نیست",
-    }) =>
-        (final String? value) {
+  final int minLength, {
+  final String requiredMessage = "فیلد الزامی است",
+  final String minLengthMessage = "مقدار وارد شده صحیح نیست",
+}) =>
+    (final String? value) {
       if (value!.isEmpty) return requiredMessage;
       if (value.length < minLength) return minLengthMessage;
       return null;
     };
 
-FormFieldValidator<String> validateNotEmpty({
+FormFieldValidator<dynamic> validateNotEmpty({
   final String requiredMessage = "فیلد الزامی است",
 }) =>
-    (final String? value) {
+    (final dynamic value) {
       if (value!.isEmpty) return requiredMessage;
       return null;
     };
@@ -49,7 +49,7 @@ FormFieldValidator<String> validateNumber({
   final String notMobileMessage = "شماره موبایل وارد شده صحیح نیست",
   final int minLength = 11,
 }) =>
-        (final String? value) {
+    (final String? value) {
       if (value!.isEmpty) return requiredMessage;
       if (!GetUtils.isNumericOnly(value.englishNumber()) || value.length < minLength || !value.startsWith("0")) return notMobileMessage;
       return null;
