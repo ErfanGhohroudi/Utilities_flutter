@@ -120,7 +120,7 @@ class _UMaterialAppState extends State<UMaterialApp> {
             debugPrint("Builder called. Locale: ${Localizations.localeOf(context)}");
           }
           return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(0.86)),
+            data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1)),
             child: EasyLoading.init()(context, child),
           );
         },
