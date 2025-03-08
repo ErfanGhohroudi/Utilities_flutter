@@ -157,30 +157,6 @@ class UIconPrimary extends StatelessWidget {
       );
 }
 
-Widget iconPrimary(
-  final String source, {
-  final Color? color,
-  final double? width,
-  final double? height,
-  final BoxFit fit = BoxFit.contain,
-  final Clip clipBehavior = Clip.hardEdge,
-  final double borderRadius = 1,
-  final EdgeInsets margin = EdgeInsets.zero,
-  final String? placeholder,
-  final ProgressIndicatorBuilder? progressIndicatorBuilder,
-  final VoidCallback? onTap,
-}) =>
-    UImage(
-      source,
-      color: color ?? Theme.of(navigatorKey.currentContext!).colorScheme.primary,
-      width: width,
-      height: height,
-      fit: fit,
-      borderRadius: borderRadius,
-      placeholder: placeholder,
-      progressIndicatorBuilder: progressIndicatorBuilder,
-    );
-
 class UImageAsset extends StatelessWidget {
   const UImageAsset(
     this.path, {
@@ -208,6 +184,7 @@ class UImageAsset extends StatelessWidget {
           width: width,
           height: height,
           fit: fit,
+          colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.color),
         ).container(radius: borderRadius)
       : Image.asset(
           path,
@@ -262,6 +239,7 @@ class UImageNetwork extends StatelessWidget {
                     width: width,
                     height: height,
                     fit: fit,
+                    colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.color),
                     placeholderBuilder: placeholder == null
                         ? null
                         : (final _) => UImageAsset(
