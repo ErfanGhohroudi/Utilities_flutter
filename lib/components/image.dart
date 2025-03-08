@@ -184,7 +184,7 @@ class UImageAsset extends StatelessWidget {
           width: width,
           height: height,
           fit: fit,
-          colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.color),
+          color: color,
         ).container(radius: borderRadius)
       : Image.asset(
           path,
@@ -239,7 +239,7 @@ class UImageNetwork extends StatelessWidget {
                     width: width,
                     height: height,
                     fit: fit,
-                    colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.color),
+                    color: color,
                     placeholderBuilder: placeholder == null
                         ? null
                         : (final _) => UImageAsset(
