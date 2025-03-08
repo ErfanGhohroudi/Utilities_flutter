@@ -117,15 +117,22 @@ class _UTextFormFieldState extends State<UTextFormField> {
       maxLines: widget.maxLines ?? (widget.minLines == 1 ? 1 : 20),
       decoration: InputDecoration(
         labelText: widget.labelText != null ? "${widget.labelText}${widget.required ? '*' : ''}" : null,
-        labelStyle:
-            widget.hintStyle ?? context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2, color: context.theme.hintColor),
+        labelStyle: widget.hintStyle ??
+            context.textTheme.bodyMedium!.copyWith(
+              fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2,
+              color: context.theme.hintColor,
+            ),
         floatingLabelStyle: widget.floatingLabelStyle ?? context.textTheme.bodyLarge!,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         isDense: widget.isDense,
         helperStyle: widget.helperStyle ?? context.textTheme.bodySmall,
         helperText: widget.helperText,
         hintText: widget.hintText,
-        hintStyle: widget.hintStyle ?? context.textTheme.bodyMedium!.copyWith(color: context.theme.hintColor),
+        hintStyle: widget.hintStyle ??
+            context.textTheme.bodyMedium!.copyWith(
+              fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2,
+              color: context.theme.hintColor,
+            ),
         contentPadding: widget.contentPadding,
         counter: widget.showCounter ? null : SizedBox(),
         suffixIcon: widget.obscureText
