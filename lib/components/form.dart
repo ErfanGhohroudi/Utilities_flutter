@@ -87,19 +87,20 @@ class _UTextFormFieldState extends State<UTextFormField> {
       enabled: true,
       textDirection: widget.textDirection ??
           (widget.keyboardType == TextInputType.number ||
-              widget.keyboardType == TextInputType.visiblePassword ||
-              widget.keyboardType == TextInputType.emailAddress ||
-              widget.keyboardType == TextInputType.url ||
-              widget.keyboardType == TextInputType.phone
+                  widget.keyboardType == TextInputType.visiblePassword ||
+                  widget.keyboardType == TextInputType.emailAddress ||
+                  widget.keyboardType == TextInputType.url ||
+                  widget.keyboardType == TextInputType.phone
               ? TextDirection.ltr
               : null),
       inputFormatters: widget.formatters ??
           [
-            if (widget.keyboardType == TextInputType.visiblePassword) FilteringTextInputFormatter.deny(RegExp(r'[\u0600-\u06FF\s\u200C]')), // بلاک کردن حروف فارسی و عربی و فاصله و نیم فاصله
+            if (widget.keyboardType == TextInputType.visiblePassword) FilteringTextInputFormatter.deny(RegExp(r'[\u0600-\u06FF\s\u200C]')),
+            // بلاک کردن حروف فارسی و عربی و فاصله و نیم فاصله
             if (widget.keyboardType == TextInputType.number) FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
             if (widget.keyboardType == TextInputType.phone) FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
           ],
-      style: TextStyle(fontSize: widget.fontSize),
+      style: context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
       maxLength: widget.maxLength,
       onChanged: widget.onChanged,
       readOnly: widget.readOnly,
@@ -116,7 +117,8 @@ class _UTextFormFieldState extends State<UTextFormField> {
       maxLines: widget.maxLines ?? (widget.minLines == 1 ? 1 : 20),
       decoration: InputDecoration(
         labelText: widget.labelText != null ? "${widget.labelText}${widget.required ? '*' : ''}" : null,
-        labelStyle: widget.hintStyle ?? context.textTheme.bodyMedium!.copyWith(color: context.theme.hintColor),
+        labelStyle:
+            widget.hintStyle ?? context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2, color: context.theme.hintColor),
         floatingLabelStyle: widget.floatingLabelStyle ?? context.textTheme.bodyLarge!,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         isDense: widget.isDense,
@@ -128,12 +130,12 @@ class _UTextFormFieldState extends State<UTextFormField> {
         counter: widget.showCounter ? null : SizedBox(),
         suffixIcon: widget.obscureText
             ? IconButton(
-          splashRadius: 1,
-          onPressed: () => setState(() => obscure = !obscure),
-          icon: obscure
-              ? Icon(Icons.visibility, color: widget.obscureIconColor ?? context.theme.hintColor)
-              : Icon(Icons.visibility_off, color: widget.obscureIconColor ?? context.theme.hintColor),
-        )
+                splashRadius: 1,
+                onPressed: () => setState(() => obscure = !obscure),
+                icon: obscure
+                    ? Icon(Icons.visibility, color: widget.obscureIconColor ?? context.theme.hintColor)
+                    : Icon(Icons.visibility_off, color: widget.obscureIconColor ?? context.theme.hintColor),
+              )
             : widget.suffix,
         prefixIcon: widget.prefix,
       ),
@@ -314,45 +316,45 @@ class UElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-    style: ButtonStyle(
-      textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
-      backgroundColor: WidgetStateProperty.all(backgroundColor?? navigatorKey.currentContext!.theme.primaryColor),
-      padding: WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: horizontalPadding?? 12)),
-      shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 12),
-        ),
-      ),
-    ),
-    onPressed: onTap,
-    child: Container(
-      constraints: BoxConstraints(
-        minWidth: width ?? 100,
-        maxWidth: width ?? context.width,
-        minHeight: height ?? 40,
-        maxHeight: height ?? 40,
-      ),
-      child: Center(
-        widthFactor: 1,
-        heightFactor: 1,
-        child: isLoading
-            ? SizedBox(
-          width: 15,
-          height: 15,
-          child: CircularProgressIndicator(
-            color: progressIndicatorColor?? Colors.white,
-            strokeCap: StrokeCap.round,
-            strokeWidth: progressIndicatorStrokeWidth?? 3.0,
+        style: ButtonStyle(
+          textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
+          backgroundColor: WidgetStateProperty.all(backgroundColor ?? navigatorKey.currentContext!.theme.primaryColor),
+          padding: WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: horizontalPadding ?? 12)),
+          shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 12),
+            ),
           ),
-        )
-            : titleWidget ??
-            Text(
-              title ?? '',
-              textAlign: TextAlign.center,
-            ).bodyMedium(color: titleColor?? Colors.white),
-      ),
-    ),
-  );
+        ),
+        onPressed: onTap,
+        child: Container(
+          constraints: BoxConstraints(
+            minWidth: width ?? 100,
+            maxWidth: width ?? context.width,
+            minHeight: height ?? 40,
+            maxHeight: height ?? 40,
+          ),
+          child: Center(
+            widthFactor: 1,
+            heightFactor: 1,
+            child: isLoading
+                ? SizedBox(
+                    width: 15,
+                    height: 15,
+                    child: CircularProgressIndicator(
+                      color: progressIndicatorColor ?? Colors.white,
+                      strokeCap: StrokeCap.round,
+                      strokeWidth: progressIndicatorStrokeWidth ?? 3.0,
+                    ),
+                  )
+                : titleWidget ??
+                    Text(
+                      title ?? '',
+                      textAlign: TextAlign.center,
+                    ).bodyMedium(color: titleColor ?? Colors.white),
+          ),
+        ),
+      );
 }
 
 class UOutlinedButton extends StatelessWidget {
