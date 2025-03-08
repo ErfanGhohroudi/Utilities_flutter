@@ -4,7 +4,7 @@ class UTextFormField extends StatefulWidget {
   const UTextFormField({
     super.key,
     this.labelText,
-    this.labelStyle,
+    this.hintStyle,
     this.hintText,
     this.contentPadding,
     this.fontSize,
@@ -42,7 +42,7 @@ class UTextFormField extends StatefulWidget {
   final bool isDense;
   final bool readOnly;
   final String? labelText;
-  final TextStyle? labelStyle;
+  final TextStyle? hintStyle;
   final String? hintText;
   final String? initialValue;
   final String? helperText;
@@ -116,13 +116,14 @@ class _UTextFormFieldState extends State<UTextFormField> {
       maxLines: widget.maxLines ?? (widget.minLines == 1 ? 1 : 20),
       decoration: InputDecoration(
         labelText: widget.labelText != null ? "${widget.labelText}${widget.required ? '*' : ''}" : null,
-        labelStyle: widget.labelStyle ?? context.textTheme.bodyMedium!.copyWith(color: context.theme.hintColor),
+        labelStyle: widget.hintStyle ?? context.textTheme.bodyMedium!.copyWith(color: context.theme.hintColor),
         floatingLabelStyle: widget.floatingLabelStyle ?? context.textTheme.bodyLarge!,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         isDense: widget.isDense,
         helperStyle: widget.helperStyle ?? context.textTheme.bodySmall,
         helperText: widget.helperText,
         hintText: widget.hintText,
+        hintStyle: widget.hintStyle ?? context.textTheme.bodyMedium!.copyWith(color: context.theme.hintColor),
         contentPadding: widget.contentPadding,
         counter: widget.showCounter ? null : SizedBox(),
         suffixIcon: widget.obscureText
