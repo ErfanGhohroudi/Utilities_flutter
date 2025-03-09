@@ -116,36 +116,36 @@ class BadgeState extends State<UBadge> with SingleTickerProviderStateMixin {
     final OutlinedBorder border = widget.shape == BadgeShape.circle
         ? CircleBorder(side: widget.borderSide)
         : RoundedRectangleBorder(
-      side: widget.borderSide,
-      borderRadius: widget.borderRadius,
-    );
+            side: widget.borderSide,
+            borderRadius: widget.borderRadius,
+          );
 
     Widget badgeView() => AnimatedOpacity(
-      opacity: widget.showBadge ? 1 : 0,
-      duration: const Duration(milliseconds: 200),
-      child: Badge(
-        label: widget.badgeContent,
-        backgroundColor: widget.badgeColor,
-      ),
-    );
+          opacity: widget.showBadge ? 1 : 0,
+          duration: const Duration(milliseconds: 200),
+          child: Badge(
+            label: widget.badgeContent,
+            backgroundColor: widget.badgeColor,
+          ),
+        );
 
     Widget badgeViewGradient() => AnimatedOpacity(
-      opacity: widget.showBadge ? 1 : 0,
-      duration: const Duration(milliseconds: 200),
-      child: Material(
-        shape: border,
-        elevation: widget.elevation,
-        child: DecoratedBox(
-          decoration: widget.shape == BadgeShape.circle
-              ? BoxDecoration(gradient: widget.gradient, shape: BoxShape.circle)
-              : BoxDecoration(
-            gradient: widget.gradient,
-            borderRadius: widget.borderRadius,
+          opacity: widget.showBadge ? 1 : 0,
+          duration: const Duration(milliseconds: 200),
+          child: Material(
+            shape: border,
+            elevation: widget.elevation,
+            child: DecoratedBox(
+              decoration: widget.shape == BadgeShape.circle
+                  ? BoxDecoration(gradient: widget.gradient, shape: BoxShape.circle)
+                  : BoxDecoration(
+                      gradient: widget.gradient,
+                      borderRadius: widget.borderRadius,
+                    ),
+              child: Padding(padding: widget.padding, child: widget.badgeContent),
+            ),
           ),
-          child: Padding(padding: widget.padding, child: widget.badgeContent),
-        ),
-      ),
-    );
+        );
 
     if (widget.toAnimate) {
       if (widget.animationType == BadgeAnimationType.slide) {
@@ -229,6 +229,7 @@ enum BadgeShape {
 
 class BadgePositioned extends StatelessWidget {
   const BadgePositioned({required this.child, super.key, this.position});
+
   final BadgePosition? position;
 
   final Widget child;
