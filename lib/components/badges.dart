@@ -123,11 +123,13 @@ class BadgeState extends State<BadgeWidget> with SingleTickerProviderStateMixin 
     Widget badgeView() => AnimatedOpacity(
           opacity: widget.showBadge ? 1 : 0,
           duration: const Duration(milliseconds: 200),
-          child: Material(
-            shape: border,
-            elevation: widget.elevation,
-            color: widget.badgeColor,
-            child: Padding(padding: widget.padding, child: widget.badgeContent),
+          child: Badge(
+            // shape: border,
+            // elevation: widget.elevation,
+            // color: widget.badgeColor,
+            label: widget.badgeContent,
+            backgroundColor: widget.badgeColor,
+            // child: Padding(padding: widget.padding, child: widget.badgeContent),
           ),
         );
 
