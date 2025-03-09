@@ -6,8 +6,8 @@ enum BadgeAnimationType {
   fade,
 }
 
-class BadgeWidget extends StatefulWidget {
-  const BadgeWidget({
+class UBadge extends StatefulWidget {
+  const UBadge({
     super.key,
     this.badgeContent,
     this.child,
@@ -66,7 +66,7 @@ class BadgeWidget extends StatefulWidget {
   BadgeState createState() => BadgeState();
 }
 
-class BadgeState extends State<BadgeWidget> with SingleTickerProviderStateMixin {
+class BadgeState extends State<UBadge> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
 
@@ -116,40 +116,36 @@ class BadgeState extends State<BadgeWidget> with SingleTickerProviderStateMixin 
     final OutlinedBorder border = widget.shape == BadgeShape.circle
         ? CircleBorder(side: widget.borderSide)
         : RoundedRectangleBorder(
-            side: widget.borderSide,
-            borderRadius: widget.borderRadius,
-          );
+      side: widget.borderSide,
+      borderRadius: widget.borderRadius,
+    );
 
     Widget badgeView() => AnimatedOpacity(
-          opacity: widget.showBadge ? 1 : 0,
-          duration: const Duration(milliseconds: 200),
-          child: Badge(
-            // shape: border,
-            // elevation: widget.elevation,
-            // color: widget.badgeColor,
-            label: widget.badgeContent,
-            backgroundColor: widget.badgeColor,
-            // child: Padding(padding: widget.padding, child: widget.badgeContent),
-          ),
-        );
+      opacity: widget.showBadge ? 1 : 0,
+      duration: const Duration(milliseconds: 200),
+      child: Badge(
+        label: widget.badgeContent,
+        backgroundColor: widget.badgeColor,
+      ),
+    );
 
     Widget badgeViewGradient() => AnimatedOpacity(
-          opacity: widget.showBadge ? 1 : 0,
-          duration: const Duration(milliseconds: 200),
-          child: Material(
-            shape: border,
-            elevation: widget.elevation,
-            child: DecoratedBox(
-              decoration: widget.shape == BadgeShape.circle
-                  ? BoxDecoration(gradient: widget.gradient, shape: BoxShape.circle)
-                  : BoxDecoration(
-                      gradient: widget.gradient,
-                      borderRadius: widget.borderRadius,
-                    ),
-              child: Padding(padding: widget.padding, child: widget.badgeContent),
-            ),
+      opacity: widget.showBadge ? 1 : 0,
+      duration: const Duration(milliseconds: 200),
+      child: Material(
+        shape: border,
+        elevation: widget.elevation,
+        child: DecoratedBox(
+          decoration: widget.shape == BadgeShape.circle
+              ? BoxDecoration(gradient: widget.gradient, shape: BoxShape.circle)
+              : BoxDecoration(
+            gradient: widget.gradient,
+            borderRadius: widget.borderRadius,
           ),
-        );
+          child: Padding(padding: widget.padding, child: widget.badgeContent),
+        ),
+      ),
+    );
 
     if (widget.toAnimate) {
       if (widget.animationType == BadgeAnimationType.slide) {
@@ -174,7 +170,7 @@ class BadgeState extends State<BadgeWidget> with SingleTickerProviderStateMixin 
   }
 
   @override
-  void didUpdateWidget(final BadgeWidget oldWidget) {
+  void didUpdateWidget(final UBadge oldWidget) {
     if (widget.badgeContent is Text && oldWidget.badgeContent is Text) {
       final Text newText = widget.badgeContent! as Text;
       final Text oldText = oldWidget.badgeContent! as Text;
