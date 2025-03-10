@@ -81,7 +81,7 @@
 //               ? ""
 //               : encodeBody
 //               ? body.toJson()
-//               : body);
+//               : body.toString());
 //     }
 //
 //     /// For when you want to call something for a response's message
