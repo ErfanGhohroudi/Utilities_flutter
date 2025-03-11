@@ -71,6 +71,8 @@ extension WidgetsExtension on Widget {
 
   Widget onLongPress(final GestureTapCallback? onPressed) => GestureDetector(onLongPress: onPressed, child: this);
 
+  Widget onLongPressStart(final Function(LongPressStartDetails details)? onLongPressed) => GestureDetector(onLongPressStart: onLongPressed, child: this);
+
   Widget onDoubleTap(final GestureTapCallback? onPressed) => GestureDetector(onDoubleTap: onPressed, child: this);
 
   Widget ltr() => Directionality(textDirection: TextDirection.ltr, child: this);
