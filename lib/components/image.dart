@@ -178,21 +178,24 @@ class UImageAsset extends StatelessWidget {
   final double borderRadius;
 
   @override
-  Widget build(final BuildContext context) => path.endsWith("svg")
-      ? SvgPicture.asset(
-          path,
-          width: width,
-          height: height,
-          fit: fit,
-          color: color,
-        ).container(radius: borderRadius)
-      : Image.asset(
-          path,
-          color: color,
-          width: width,
-          height: height,
-          fit: fit,
-        ).container(radius: borderRadius);
+  Widget build(final BuildContext context) => ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius),
+        child: path.endsWith("svg")
+            ? SvgPicture.asset(
+                path,
+                width: width,
+                height: height,
+                fit: fit,
+                color: color,
+              )
+            : Image.asset(
+                path,
+                color: color,
+                width: width,
+                height: height,
+                fit: fit,
+              ),
+      );
 }
 
 class UImageNetwork extends StatelessWidget {
@@ -220,64 +223,67 @@ class UImageNetwork extends StatelessWidget {
   final ProgressIndicatorBuilder? progressIndicatorBuilder;
 
   @override
-  Widget build(final BuildContext context) => Builder(
-        builder: (final BuildContext context) => url.length <= 10
-            ? placeholder == null
-                ? SizedBox(width: width, height: height)
-                : UImageAsset(
-                    placeholder!,
-                    width: width,
-                    height: height,
-                    color: color,
-                    fit: fit,
-                    clipBehavior: clipBehavior,
-                    borderRadius: borderRadius,
-                  )
-            : url.substring(url.length - 3) == "svg"
-                ? SvgPicture.network(
-                    url,
-                    width: width,
-                    height: height,
-                    fit: fit,
-                    color: color,
-                    placeholderBuilder: placeholder == null
-                        ? null
-                        : (final _) => UImageAsset(
-                              placeholder!,
-                              width: width,
-                              height: height,
-                              fit: fit,
-                              clipBehavior: clipBehavior,
-                              borderRadius: borderRadius,
-                            ),
-                  )
-                : CachedNetworkImage(
-                    imageUrl: url,
-                    color: color,
-                    width: width,
-                    height: height,
-                    fit: fit,
-                    progressIndicatorBuilder: progressIndicatorBuilder,
-                    errorWidget: placeholder == null
-                        ? null
-                        : (final _, final __, final ___) => UImage(
-                              placeholder!,
-                              color: color,
-                              width: width,
-                              height: height,
-                              fit: fit,
-                            ),
-                    placeholder: placeholder == null
-                        ? null
-                        : (final _, final __) => UImage(
-                              placeholder!,
-                              color: color,
-                              width: width,
-                              height: height,
-                              fit: fit,
-                            ),
-                  ),
-      ).container(radius: borderRadius);
+  Widget build(final BuildContext context) => ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius),
+        child: Builder(
+          builder: (final BuildContext context) => url.length <= 10
+              ? placeholder == null
+                  ? SizedBox(width: width, height: height)
+                  : UImageAsset(
+                      placeholder!,
+                      width: width,
+                      height: height,
+                      color: color,
+                      fit: fit,
+                      clipBehavior: clipBehavior,
+                      borderRadius: borderRadius,
+                    )
+              : url.substring(url.length - 3) == "svg"
+                  ? SvgPicture.network(
+                      url,
+                      width: width,
+                      height: height,
+                      fit: fit,
+                      color: color,
+                      placeholderBuilder: placeholder == null
+                          ? null
+                          : (final _) => UImageAsset(
+                                placeholder!,
+                                width: width,
+                                height: height,
+                                fit: fit,
+                                clipBehavior: clipBehavior,
+                                borderRadius: borderRadius,
+                              ),
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: url,
+                      color: color,
+                      width: width,
+                      height: height,
+                      fit: fit,
+                      progressIndicatorBuilder: progressIndicatorBuilder,
+                      errorWidget: placeholder == null
+                          ? null
+                          : (final _, final __, final ___) => UImage(
+                                placeholder!,
+                                color: color,
+                                width: width,
+                                height: height,
+                                fit: fit,
+                              ),
+                      placeholder: placeholder == null
+                          ? null
+                          : (final _, final __) => UImage(
+                                placeholder!,
+                                color: color,
+                                width: width,
+                                height: height,
+                                fit: fit,
+                              ),
+                    ),
+        ),
+      );
 }
 
 class UImageFile extends StatelessWidget {
@@ -299,13 +305,16 @@ class UImageFile extends StatelessWidget {
   final double borderRadius;
 
   @override
-  Widget build(final BuildContext context) => Image.file(
-        file,
-        color: color,
-        width: width,
-        height: height,
-        fit: fit,
-      ).container(radius: borderRadius);
+  Widget build(final BuildContext context) => ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius),
+        child: Image.file(
+          file,
+          color: color,
+          width: width,
+          height: height,
+          fit: fit,
+        ),
+      );
 }
 
 class UImageMemory extends StatelessWidget {
@@ -327,11 +336,14 @@ class UImageMemory extends StatelessWidget {
   final double borderRadius;
 
   @override
-  Widget build(final BuildContext context) => Image.memory(
-        file,
-        color: color,
-        width: width,
-        height: height,
-        fit: fit,
-      ).container(radius: borderRadius);
+  Widget build(final BuildContext context) => ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius),
+        child: Image.memory(
+          file,
+          color: color,
+          width: width,
+          height: height,
+          fit: fit,
+        ),
+      );
 }
