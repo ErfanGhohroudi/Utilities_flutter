@@ -34,6 +34,7 @@ class UTextFormField extends StatefulWidget {
     this.textAlign = TextAlign.start,
     this.showCounter = false,
     this.textDirection,
+    this.borderColor,
   });
 
   final bool obscureText;
@@ -67,6 +68,7 @@ class UTextFormField extends StatefulWidget {
   final List<TextInputFormatter>? formatters;
   final bool showCounter;
   final TextDirection? textDirection;
+  final Color? borderColor;
 
   @override
   State<UTextFormField> createState() => _UTextFormFieldState();
@@ -145,6 +147,11 @@ class _UTextFormFieldState extends State<UTextFormField> {
               )
             : widget.suffix,
         prefixIcon: widget.prefix,
+        border: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
+        enabledBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
+        disabledBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
+        errorBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
+        focusedBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
       ),
     );
   }
