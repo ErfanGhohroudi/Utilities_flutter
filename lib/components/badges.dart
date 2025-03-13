@@ -22,6 +22,7 @@ class UBadge extends StatefulWidget {
     this.alignment = Alignment.center,
     this.animationType = BadgeAnimationType.slide,
     this.showBadge = true,
+    this.smallSize,
     this.ignorePointer = false,
     this.borderSide = BorderSide.none,
     this.stackFit = StackFit.loose,
@@ -61,6 +62,8 @@ class UBadge extends StatefulWidget {
   final EdgeInsetsGeometry padding;
 
   final bool showBadge;
+
+  final double? smallSize;
 
   @override
   BadgeState createState() => BadgeState();
@@ -125,6 +128,7 @@ class BadgeState extends State<UBadge> with SingleTickerProviderStateMixin {
           duration: const Duration(milliseconds: 200),
           child: Badge(
             label: widget.badgeContent,
+            smallSize: widget.smallSize,
             backgroundColor: widget.badgeColor,
           ),
         );
