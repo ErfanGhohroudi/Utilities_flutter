@@ -103,7 +103,8 @@ class _UMaterialAppState extends State<UMaterialApp> {
   }
 
   @override
-  Widget build(BuildContext context) => GetMaterialApp(
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
@@ -125,4 +126,5 @@ class _UMaterialAppState extends State<UMaterialApp> {
           );
         },
       );
+  }
 }
