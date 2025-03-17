@@ -213,8 +213,8 @@ extension WidgetsExtension on Widget {
     final Color? highlightColor,
   }) =>
       Shimmer.fromColors(
-        baseColor: baseColor ?? Get.context!.theme.hintColor.withAlpha(26),
-        highlightColor: highlightColor ?? Get.context!.theme.hintColor.withAlpha(128),
+        baseColor: baseColor ?? navigatorKey.currentContext!.theme.hintColor.withAlpha(26),
+        highlightColor: highlightColor ?? navigatorKey.currentContext!.theme.hintColor.withAlpha(128),
         child: this,
       );
 }
