@@ -1,3 +1,4 @@
+import 'package:shimmer/shimmer.dart' show Shimmer;
 import 'package:u/utilities.dart';
 
 extension WidgetsExtension on Widget {
@@ -204,6 +205,16 @@ extension WidgetsExtension on Widget {
         alignment: Alignment.topRight,
         heightFactor: heightFactor,
         widthFactor: widthFactor,
+        child: this,
+      );
+
+  Widget shimmer({
+    final Color? baseColor,
+    final Color? highlightColor,
+  }) =>
+      Shimmer.fromColors(
+        baseColor: baseColor ?? Get.context!.theme.hintColor.withAlpha(26),
+        highlightColor: highlightColor ?? Get.context!.theme.hintColor.withAlpha(128),
         child: this,
       );
 }
