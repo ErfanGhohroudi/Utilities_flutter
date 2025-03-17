@@ -14,6 +14,7 @@ Future<void> initUtilities({
   final String? channelName,
   required final String notificationIcon,
   final Color easyLoadingPrimaryColor = Colors.blue,
+  final EasyLoadingIndicatorType easyLoadingIndicatorType = EasyLoadingIndicatorType.dualRing,
   final bool safeDevice = false,
   final bool protectDataLeaking = false,
   final bool preventScreenShot = false,
@@ -57,7 +58,7 @@ Future<void> initUtilities({
 
   EasyLoading.instance
     ..displayDuration = const Duration(milliseconds: 2000)
-    ..indicatorType = EasyLoadingIndicatorType.dualRing
+    ..indicatorType = easyLoadingIndicatorType
     ..indicatorSize = 45.0
     ..radius = 10.1
     ..progressColor = easyLoadingPrimaryColor
