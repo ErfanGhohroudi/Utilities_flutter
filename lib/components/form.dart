@@ -311,6 +311,8 @@ class UElevatedButton extends StatelessWidget {
     this.backgroundColor,
     this.horizontalPadding,
     this.borderRadius,
+    this.borderWidth,
+    this.borderColor = Colors.grey,
   });
 
   final String? title;
@@ -327,6 +329,8 @@ class UElevatedButton extends StatelessWidget {
   final Color? backgroundColor;
   final double? horizontalPadding;
   final double? borderRadius;
+  final double? borderWidth;
+  final Color borderColor;
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
@@ -337,6 +341,7 @@ class UElevatedButton extends StatelessWidget {
           shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius ?? 12),
+              side: borderWidth != null ? BorderSide(width: borderWidth ?? 1, color: borderColor) : BorderSide.none,
             ),
           ),
         ),
