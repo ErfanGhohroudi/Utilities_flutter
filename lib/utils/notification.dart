@@ -11,7 +11,7 @@ abstract class UNotification {
     RemoteMessage message, {
     required String channelId,
     required String channelName,
-    VoidCallback? onReceiveNotificationWhenInApp,
+    Function(RemoteMessage message)? onReceiveNotificationWhenInApp,
   }) async {
     final FlutterLocalNotificationsPlugin notificationsPlugin = FlutterLocalNotificationsPlugin();
     RemoteNotification? notification = message.notification;
@@ -19,7 +19,7 @@ abstract class UNotification {
 
     if (onReceiveNotificationWhenInApp != null) {
       // Core.notificationsCount(Core.notificationsCount.value + 1);
-      onReceiveNotificationWhenInApp();
+      onReceiveNotificationWhenInApp(message);
     }
 
     BigPictureStyleInformation? bigPictureStyleInformation;

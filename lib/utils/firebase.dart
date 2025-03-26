@@ -11,7 +11,7 @@ abstract class UFirebase {
   static void setupFirebaseMessaging({
     required String channelId,
     required String channelName,
-    VoidCallback? onReceiveNotificationWhenInApp,
+    Function(RemoteMessage message)? onReceiveNotificationWhenInApp,
     required Function(RemoteMessage message) onMessageOpenedApp,
     required Future<void> Function(RemoteMessage message) onBackgroundMessageReceive,
   }) async {
