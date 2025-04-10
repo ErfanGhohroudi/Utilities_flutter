@@ -1,5 +1,4 @@
 import 'package:u/utilities.dart';
-
 String uuidV4() => const Uuid().v4();
 
 String uuidV1() => const Uuid().v1();
