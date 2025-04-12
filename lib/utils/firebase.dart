@@ -4,7 +4,9 @@ abstract class UFirebase {
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    debugPrint('Handling a background message: ${message.messageId}');
+    if (kDebugMode) {
+      print('Handling a background message: ${message.messageId}');
+    }
   }
 
   /// use [setupFirebaseMessaging] in main Rout page
@@ -24,9 +26,11 @@ abstract class UFirebase {
       sound: true,
     );
 
-    debugPrint(
-      settings.authorizationStatus == AuthorizationStatus.authorized ? "User granted permission" : "User declined or has not granted permission",
-    );
+    if (kDebugMode) {
+      print(
+        settings.authorizationStatus == AuthorizationStatus.authorized ? "User granted permission" : "User declined or has not granted permission",
+      );
+    }
 
     if (UApp.isIos) {
       await messaging.setForegroundNotificationPresentationOptions(
@@ -51,7 +55,9 @@ abstract class UFirebase {
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      debugPrint("Notification clicked!");
+      if (kDebugMode) {
+        print("Notification clicked!");
+      }
       onMessageOpenedApp(message);
     });
   }
@@ -62,7 +68,9 @@ abstract class UFirebase {
     // Get FCM token
     String? token = await messaging.getToken();
     if (token != null) {
-      debugPrint("Firebase Messaging Token: $token");
+      if (kDebugMode) {
+        print("Firebase Messaging Token: $token");
+      }
       UCore.fcmToken = token;
     }
   }

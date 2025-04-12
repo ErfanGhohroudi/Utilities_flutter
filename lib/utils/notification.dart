@@ -15,7 +15,9 @@ abstract class UNotification {
   }) async {
     final FlutterLocalNotificationsPlugin notificationsPlugin = FlutterLocalNotificationsPlugin();
     RemoteNotification? notification = message.notification;
-    debugPrint("notif data => ${message.data.toString()}");
+    if (kDebugMode) {
+      print("notif data => ${message.data.toString()}");
+    }
 
     if (onReceiveNotificationWhenInApp != null) {
       // Core.notificationsCount(Core.notificationsCount.value + 1);
