@@ -14,6 +14,7 @@ class UTextFormField extends StatefulWidget {
     this.prefix,
     this.suffix,
     this.onSave,
+    this.onEditingComplete,
     this.initialValue,
     this.helperText,
     this.helperStyle,
@@ -62,6 +63,7 @@ class UTextFormField extends StatefulWidget {
   final Widget? prefix;
   final Widget? suffix;
   final Function(String? value)? onSave;
+  final Function()? onEditingComplete;
   final TextAlign textAlign;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onFieldSubmitted;
@@ -109,6 +111,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
       initialValue: widget.initialValue,
       textAlign: widget.textAlign,
       onSaved: widget.onSave,
+      onEditingComplete: widget.onEditingComplete,
       onTap: widget.onTap,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
@@ -136,7 +139,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
               color: context.theme.hintColor,
             ),
         contentPadding: widget.contentPadding,
-        counter: widget.showCounter ? null : SizedBox(),
+        counter: widget.showCounter ? null : const SizedBox(),
         suffixIcon: widget.obscureText
             ? IconButton(
                 splashRadius: 1,
@@ -159,7 +162,6 @@ class _UTextFormFieldState extends State<UTextFormField> {
 
 class UTextFieldPersianDatePicker extends StatefulWidget {
   const UTextFieldPersianDatePicker({
-    super.key,
     required this.onChange,
     this.fontSize,
     this.hintText,
@@ -178,6 +180,7 @@ class UTextFieldPersianDatePicker extends StatefulWidget {
     this.submitButtonText = "Submit",
     this.cancelButtonText = "Cancel",
     this.textAlign = TextAlign.start,
+    super.key,
   });
 
   final Function(DateTime, Jalali) onChange;
@@ -261,7 +264,7 @@ class _UTextFieldPersianDatePickerState extends State<UTextFieldPersianDatePicke
                               UNavigator.back();
                             },
                           ).expanded(),
-                          SizedBox(width: 12),
+                          const SizedBox(width: 12),
                           UElevatedButton(
                             title: widget.cancelButtonText,
                             backgroundColor: Theme.of(context).colorScheme.primary,
@@ -275,7 +278,7 @@ class _UTextFieldPersianDatePickerState extends State<UTextFieldPersianDatePicke
                     if (widget.time) {
                       TimeOfDay? timeOfDay = await showTimePicker(
                         context: context,
-                        initialTime: TimeOfDay(hour: 0, minute: 0),
+                        initialTime: const TimeOfDay(hour: 0, minute: 0),
                       );
                       jalali = Jalali(
                         jalali.year,
@@ -415,7 +418,6 @@ class UOutlinedButton extends StatelessWidget {
 
 class UTextFieldTypeAhead<T> extends StatelessWidget {
   const UTextFieldTypeAhead({
-    super.key,
     required this.onSuggestionSelected,
     required this.suggestionsCallback,
     this.itemBuilder,
@@ -430,6 +432,7 @@ class UTextFieldTypeAhead<T> extends StatelessWidget {
     this.onChanged,
     this.isDense = false,
     this.hideKeyboard = false,
+    super.key,
   });
 
   final void Function(T) onSuggestionSelected;
