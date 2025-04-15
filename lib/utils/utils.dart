@@ -35,23 +35,34 @@ FormFieldValidator<dynamic> validateNotEmpty({
     };
 
 FormFieldValidator<String> validateEmail({
+  final bool required = true,
   final String requiredMessage = "فیلد الزامی است",
   final String notEmailMessage = "ایمیل وارد شده صحیح نیست",
 }) =>
     (final String? value) {
-      if (value!.isEmpty) return requiredMessage;
+      if (!required && value!.isEmpty) {
+        return null;
+      } else if (value!.isEmpty) {
+        return requiredMessage;
+      }
       if (!value.isEmail) return notEmailMessage;
       return null;
     };
 
 FormFieldValidator<String> validateNumber({
+  final bool required = true,
   final String requiredMessage = "فیلد الزامی است",
   final String notMobileMessage = "شماره موبایل وارد شده صحیح نیست",
   final int minLength = 11,
+  final String startWith = "0"
 }) =>
     (final String? value) {
-      if (value!.isEmpty) return requiredMessage;
-      if (!GetUtils.isNumericOnly(value.englishNumber()) || value.length < minLength || !value.startsWith("0")) return notMobileMessage;
+      if (!required && value!.isEmpty) {
+        return null;
+      } else if (value!.isEmpty) {
+        return requiredMessage;
+      }
+      if (!GetUtils.isNumericOnly(value.englishNumber()) || value.length < minLength || !value.startsWith(startWith)) return notMobileMessage;
       return null;
     };
 
