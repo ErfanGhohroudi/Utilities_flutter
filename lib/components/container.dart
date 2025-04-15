@@ -9,18 +9,13 @@ class UScaffold extends StatelessWidget {
     this.endDrawer,
     this.floatingActionButton,
     this.bottomNavigationBar,
-    this.padding,
     this.color,
-    this.decoration,
-    this.constraints,
-    this.width,
-    this.height,
     this.onDrawerChanged,
     this.onEndDrawerChanged,
     this.resizeToAvoidBottomInset = false,
     this.extendBodyBehindAppBar = false,
     this.floatingActionButtonLocation = FloatingActionButtonLocation.endFloat,
-    this.alignment = Alignment.center,
+    this.maxWidth,
   });
 
   final Widget body;
@@ -29,46 +24,34 @@ class UScaffold extends StatelessWidget {
   final Widget? endDrawer;
   final Widget? floatingActionButton;
   final Widget? bottomNavigationBar;
-  final EdgeInsets? padding;
   final Color? color;
-  final BoxDecoration? decoration;
   final bool resizeToAvoidBottomInset;
   final bool extendBodyBehindAppBar;
   final FloatingActionButtonLocation floatingActionButtonLocation;
-  final BoxConstraints? constraints;
-  final double? width;
-  final double? height;
   final DrawerCallback? onDrawerChanged;
   final DrawerCallback? onEndDrawerChanged;
-  final Alignment alignment;
+  final double? maxWidth;
 
   @override
   Widget build(final BuildContext context) => GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
-        child: Scaffold(
-          onDrawerChanged: onDrawerChanged,
-          onEndDrawerChanged: onEndDrawerChanged,
-          key: key,
-          backgroundColor: color,
-          appBar: appBar,
-          drawer: drawer,
-          extendBody: resizeToAvoidBottomInset ? true : false,
-          endDrawer: endDrawer,
-          extendBodyBehindAppBar: extendBodyBehindAppBar,
-          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-          floatingActionButton: floatingActionButton,
-          floatingActionButtonLocation: floatingActionButtonLocation,
-          bottomNavigationBar: bottomNavigationBar,
-          body: Align(
-            alignment: alignment,
-            child: Container(
-              width: width,
-              height: height,
-              constraints: constraints,
-              decoration: decoration,
-              padding: padding,
-              child: body,
-            ),
+        child: Container(
+          constraints: BoxConstraints(maxWidth: maxWidth?? context.width),
+          child: Scaffold(
+            onDrawerChanged: onDrawerChanged,
+            onEndDrawerChanged: onEndDrawerChanged,
+            key: key,
+            backgroundColor: color,
+            appBar: appBar,
+            drawer: drawer,
+            extendBody: resizeToAvoidBottomInset ? true : false,
+            endDrawer: endDrawer,
+            extendBodyBehindAppBar: extendBodyBehindAppBar,
+            resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+            floatingActionButton: floatingActionButton,
+            floatingActionButtonLocation: floatingActionButtonLocation,
+            bottomNavigationBar: bottomNavigationBar,
+            body: body,
           ),
         ),
       );
