@@ -53,6 +53,7 @@ FormFieldValidator<String> validateNumber({
   final bool required = true,
   final String requiredMessage = "فیلد الزامی است",
   final String notMobileMessage = "شماره موبایل وارد شده صحیح نیست",
+  final String isShortMobileMessage = "شماره موبایل وارد شده کوتاه است",
   final int minLength = 11,
   final String startWith = "0"
 }) =>
@@ -62,6 +63,7 @@ FormFieldValidator<String> validateNumber({
       } else if (value!.isEmpty) {
         return requiredMessage;
       }
+      if (GetUtils.isNumericOnly(value.englishNumber()) && value.length < minLength && value.startsWith(startWith)) return isShortMobileMessage;
       if (!GetUtils.isNumericOnly(value.englishNumber()) || value.length < minLength || !value.startsWith(startWith)) return notMobileMessage;
       return null;
     };
