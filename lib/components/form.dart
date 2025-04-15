@@ -36,6 +36,7 @@ class UTextFormField extends StatefulWidget {
     this.showCounter = false,
     this.textDirection,
     this.borderColor,
+    this.autovalidateMode,
   });
 
   final bool obscureText;
@@ -71,6 +72,7 @@ class UTextFormField extends StatefulWidget {
   final bool showCounter;
   final TextDirection? textDirection;
   final Color? borderColor;
+  final AutovalidateMode? autovalidateMode;
 
   @override
   State<UTextFormField> createState() => _UTextFormFieldState();
@@ -89,6 +91,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       enabled: true,
+      autovalidateMode: widget.autovalidateMode,
       textDirection: widget.textDirection ??
           (widget.keyboardType == TextInputType.number ||
                   widget.keyboardType == TextInputType.visiblePassword ||
