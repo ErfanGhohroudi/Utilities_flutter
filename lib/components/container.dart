@@ -44,7 +44,7 @@ class UScaffold extends StatelessWidget {
             backgroundColor: color,
             appBar: appBar,
             drawer: drawer,
-            extendBody: resizeToAvoidBottomInset ? true : false,
+            // extendBody: resizeToAvoidBottomInset ? true : false,
             endDrawer: endDrawer,
             extendBodyBehindAppBar: extendBodyBehindAppBar,
             resizeToAvoidBottomInset: resizeToAvoidBottomInset,
