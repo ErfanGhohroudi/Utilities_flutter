@@ -504,6 +504,9 @@ class UOtpField extends StatelessWidget {
     this.onTap,
     this.validator,
     this.errorAnimationController,
+    this.errorTextDirection = TextDirection.ltr,
+    this.textStyle,
+    this.hintStyle,
     super.key,
   });
 
@@ -525,6 +528,9 @@ class UOtpField extends StatelessWidget {
   final Function? onTap;
   final String? Function(String?)? validator;
   final StreamController<ErrorAnimationType>? errorAnimationController;
+  final TextDirection errorTextDirection;
+  final TextStyle? textStyle;
+  final TextStyle? hintStyle;
 
   @override
   Widget build(BuildContext context) => PinCodeTextField(
@@ -538,6 +544,11 @@ class UOtpField extends StatelessWidget {
         hintCharacter: hintCharacter,
         validator: validator,
         errorAnimationController: errorAnimationController,
+        errorTextMargin: const EdgeInsets.only(top: 5),
+        errorTextDirection: errorTextDirection,
+        textStyle: textStyle,
+        pastedTextStyle: textStyle,
+        hintStyle: hintStyle,
         pinTheme: PinTheme(
           shape: shape,
           fieldOuterPadding: fieldOuterPadding,
