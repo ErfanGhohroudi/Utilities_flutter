@@ -544,7 +544,7 @@ class UOtpField extends StatelessWidget {
         hintCharacter: hintCharacter,
         validator: validator,
         errorAnimationController: errorAnimationController,
-        errorTextMargin: const EdgeInsets.only(top: 5),
+        errorTextSpace: 20,
         errorTextDirection: errorTextDirection,
         textStyle: textStyle,
         pastedTextStyle: textStyle,
