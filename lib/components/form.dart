@@ -503,6 +503,7 @@ class UOtpField extends StatelessWidget {
     this.cursorColor,
     this.onTap,
     this.validator,
+    this.errorAnimationController,
     super.key,
   });
 
@@ -523,6 +524,7 @@ class UOtpField extends StatelessWidget {
   final Color? cursorColor;
   final Function? onTap;
   final String? Function(String?)? validator;
+  final StreamController<ErrorAnimationType>? errorAnimationController;
 
   @override
   Widget build(BuildContext context) => PinCodeTextField(
@@ -535,6 +537,7 @@ class UOtpField extends StatelessWidget {
         mainAxisAlignment: mainAxisAlignment,
         hintCharacter: hintCharacter,
         validator: validator,
+        errorAnimationController: errorAnimationController,
         pinTheme: PinTheme(
           shape: shape,
           fieldOuterPadding: fieldOuterPadding,
