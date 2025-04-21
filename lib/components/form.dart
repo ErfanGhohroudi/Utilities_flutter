@@ -351,7 +351,11 @@ class UElevatedButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: onTap,
+        onPressed: () {
+          if (!isLoading) {
+            onTap?.call();
+          }
+        },
         child: Container(
           constraints: BoxConstraints(
             minWidth: width ?? 100,
