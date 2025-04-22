@@ -26,8 +26,14 @@ abstract class UNavigator {
     final bool barrierDismissible = true,
     final bool useSafeArea = false,
     final VoidCallback? onDismiss,
+    final Color? barrierColor,
   }) =>
-      Get.dialog(page, useSafeArea: useSafeArea, barrierDismissible: barrierDismissible).then(
+      Get.dialog(
+        page,
+        useSafeArea: useSafeArea,
+        barrierDismissible: barrierDismissible,
+        barrierColor: barrierColor,
+      ).then(
         (final _) => onDismiss != null ? onDismiss() : null,
       );
 
