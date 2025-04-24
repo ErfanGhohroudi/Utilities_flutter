@@ -155,6 +155,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
               )
             : widget.suffix,
         suffixText: widget.suffixText,
+        suffixStyle: context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
         prefixIcon: widget.prefix,
         border: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
         enabledBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
