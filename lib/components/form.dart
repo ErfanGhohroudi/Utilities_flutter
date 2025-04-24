@@ -13,6 +13,7 @@ class UTextFormField extends StatefulWidget {
     this.validator,
     this.prefix,
     this.suffix,
+    this.suffixText,
     this.onSave,
     this.onEditingComplete,
     this.initialValue,
@@ -63,6 +64,7 @@ class UTextFormField extends StatefulWidget {
   final VoidCallback? onTap;
   final Widget? prefix;
   final Widget? suffix;
+  final String? suffixText;
   final Function(String? value)? onSave;
   final Function()? onEditingComplete;
   final TextAlign textAlign;
@@ -152,6 +154,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
                     : Icon(Icons.visibility_off, color: widget.obscureIconColor ?? context.theme.hintColor),
               )
             : widget.suffix,
+        suffixText: widget.suffixText,
         prefixIcon: widget.prefix,
         border: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
         enabledBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
