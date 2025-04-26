@@ -131,6 +131,8 @@ class _UTextFormFieldState extends State<UTextFormField> {
       minLines: widget.minLines,
       maxLines: widget.maxLines ?? (widget.minLines == 1 ? 1 : 20),
       decoration: InputDecoration(
+        fillColor: context.theme.dividerColor.withAlpha(50),
+        filled: !widget.enabled,
         labelText: widget.labelText != null ? "${widget.labelText}${widget.required ? '*' : ''}" : null,
         labelStyle: widget.hintStyle ??
             context.textTheme.bodyMedium!.copyWith(
