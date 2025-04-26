@@ -3,6 +3,7 @@ import 'package:u/utilities.dart';
 class UTextFormField extends StatefulWidget {
   const UTextFormField({
     super.key,
+    this.enabled = true,
     this.focusNode,
     this.labelText,
     this.hintStyle,
@@ -41,6 +42,7 @@ class UTextFormField extends StatefulWidget {
     this.autovalidateMode,
   });
 
+  final bool enabled;
   final FocusNode? focusNode;
   final bool obscureText;
   final Color? obscureIconColor;
@@ -94,7 +96,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      enabled: true,
+      enabled: widget.enabled,
       focusNode: widget.focusNode,
       autovalidateMode: widget.autovalidateMode,
       textDirection: widget.textDirection ??
