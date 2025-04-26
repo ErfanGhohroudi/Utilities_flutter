@@ -17,11 +17,16 @@ bool hasMatch(final String? value, final String pattern) => (value == null) ? fa
 
 FormFieldValidator<String> validateMinLength(
   final int minLength, {
+  final bool required = true,
   final String requiredMessage = "فیلد الزامی است",
   final String minLengthMessage = "مقدار وارد شده صحیح نیست",
 }) =>
     (final String? value) {
-      if (value!.isEmpty) return requiredMessage;
+      if (!required && value!.isEmpty) {
+        return null;
+      } else if (value!.isEmpty) {
+        return requiredMessage;
+      }
       if (value.length < minLength) return minLengthMessage;
       return null;
     };
@@ -49,14 +54,13 @@ FormFieldValidator<String> validateEmail({
       return null;
     };
 
-FormFieldValidator<String> validateNumber({
-  final bool required = true,
-  final String requiredMessage = "فیلد الزامی است",
-  final String notMobileMessage = "شماره موبایل وارد شده صحیح نیست",
-  final String isShortMobileMessage = "شماره موبایل وارد شده کوتاه است",
-  final int minLength = 11,
-  final String startWith = "0"
-}) =>
+FormFieldValidator<String> validateNumber(
+        {final bool required = true,
+        final String requiredMessage = "فیلد الزامی است",
+        final String notMobileMessage = "شماره موبایل وارد شده صحیح نیست",
+        final String isShortMobileMessage = "شماره موبایل وارد شده کوتاه است",
+        final int minLength = 11,
+        final String startWith = "0"}) =>
     (final String? value) {
       if (!required && value!.isEmpty) {
         return null;
