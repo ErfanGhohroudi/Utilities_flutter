@@ -77,7 +77,6 @@ export 'components/signaturepad.dart';
 export 'components/webview.dart';
 export 'utils/clipboard.dart';
 export 'utils/constants.dart';
-export 'utils/enums.dart';
 export 'utils/extensions/date_extension.dart';
 export 'utils/extensions/iterable_extension.dart';
 export 'utils/extensions/number_extension.dart';
