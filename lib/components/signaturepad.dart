@@ -32,7 +32,7 @@ class SignaturePad extends StatelessWidget {
         children: [
           Container(
             width: 300,
-            height: 300,
+            height: 200,
             decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
             child: SfSignaturePad(
               key: signatureGlobalKey,
