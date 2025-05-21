@@ -8,6 +8,9 @@ class SignaturePad extends StatelessWidget {
     this.saveButtonText = "Save",
     this.clearButtonText = "Clear",
     this.pixelRatio = 1.0,
+    this.clearButtonColor,
+    this.activeSaveButtonColor,
+    this.disActiveSaveButtonColor,
     super.key,
   });
 
@@ -17,6 +20,9 @@ class SignaturePad extends StatelessWidget {
   final String saveButtonText;
   final String clearButtonText;
   final double pixelRatio;
+  final Color? clearButtonColor;
+  final Color? activeSaveButtonColor;
+  final Color? disActiveSaveButtonColor;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -45,7 +51,7 @@ class SignaturePad extends StatelessWidget {
             children: <Widget>[
               UElevatedButton(
                 title: clearButtonText,
-                backgroundColor: context.theme.hintColor,
+                backgroundColor: clearButtonColor ?? context.theme.hintColor,
                 onTap: () {
                   signatureGlobalKey.currentState!.clear();
                   isNotEmpty(false);
@@ -54,7 +60,7 @@ class SignaturePad extends StatelessWidget {
               Obx(
                 () => UElevatedButton(
                   title: saveButtonText,
-                  backgroundColor: isNotEmpty.value ? null : context.theme.dividerColor,
+                  backgroundColor: isNotEmpty.value ? activeSaveButtonColor : disActiveSaveButtonColor ?? context.theme.dividerColor,
                   onTap: handleSaveButtonPressed,
                 ),
               ).expanded(),
