@@ -87,9 +87,12 @@ abstract class UFile {
 
   static Future<File> writeToFile(final Uint8List data) async {
     final Directory tempDir = await getTemporaryDirectory();
-    return File('${tempDir.path}/${Random.secure().nextInt(10000)}.tmp').writeAsBytes(
+    return File('${tempDir.path}/${Random.secure().nextInt(10000)}.png').writeAsBytes(
       data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
     );
+    // return File('${tempDir.path}/${Random.secure().nextInt(10000)}.tmp').writeAsBytes(
+    //   data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+    // );
   }
 
   static Future<FileData?> cropImage({
