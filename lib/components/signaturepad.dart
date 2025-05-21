@@ -36,7 +36,7 @@ class SignaturePad extends StatelessWidget {
             decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
             child: SfSignaturePad(
               key: signatureGlobalKey,
-              backgroundColor: Colors.grey[100],
+              // backgroundColor: Colors.grey[100],
               strokeColor: Colors.black,
               minimumStrokeWidth: 1.5,
               maximumStrokeWidth: 1.5,
