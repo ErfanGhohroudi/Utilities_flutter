@@ -110,7 +110,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
       inputFormatters: widget.formatters ??
           [
             // بلاک کردن حروف فارسی و عربی و فاصله و نیم فاصله
-            if (widget.keyboardType == TextInputType.visiblePassword) FilteringTextInputFormatter.deny(RegExp(r'[\u0600-\u065F\u0670-\u06FF\s\u200C]')),
+            if (widget.keyboardType == TextInputType.visiblePassword) FilteringTextInputFormatter.allow(RegExp(r'[!-~\u06F0-\u06F9]')),
             if (widget.keyboardType == TextInputType.emailAddress) FilteringTextInputFormatter.deny(RegExp(r'[\u0600-\u06FF\s\u200C]')),
             if (widget.keyboardType == TextInputType.number) FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
             if (widget.keyboardType == TextInputType.phone) FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
