@@ -2,8 +2,10 @@ import 'package:u/utilities.dart';
 import 'package:http/http.dart' as http;
 
 abstract class UNotification {
-  static Future<Uint8List> _getByteArrayFromUrl(String url) async {
-    final http.Response response = await http.get(Uri.parse(url));
+  static Future<Uint8List?> _getByteArrayFromUrl(String url) async {
+    final uri = Uri.tryParse(url);
+    if (uri == null) return null;
+    final http.Response response = await http.get(uri);
     return response.bodyBytes;
   }
 
@@ -28,7 +30,7 @@ abstract class UNotification {
     ByteArrayAndroidBitmap? largeIcon;
 
     if (message.data["image"] != null) {
-      largeIcon = ByteArrayAndroidBitmap(await _getByteArrayFromUrl(message.data["image"]));
+      largeIcon = await _getByteArrayFromUrl(message.data["image"]) != null ? ByteArrayAndroidBitmap((await _getByteArrayFromUrl(message.data["image"]))!) : null;
 
       // final ByteArrayAndroidBitmap bigPicture = ByteArrayAndroidBitmap(
       //     await _getByteArrayFromUrl(message.data["image"]));
