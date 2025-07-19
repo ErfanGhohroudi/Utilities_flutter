@@ -20,6 +20,7 @@ class UTextFormField extends StatefulWidget {
     this.onEditingComplete,
     this.initialValue,
     this.helperText,
+    this.helperMaxLines,
     this.helperStyle,
     this.floatingLabelStyle,
     this.textHeight,
@@ -54,6 +55,7 @@ class UTextFormField extends StatefulWidget {
   final String? hintText;
   final String? initialValue;
   final String? helperText;
+  final int? helperMaxLines;
   final TextStyle? helperStyle;
   final TextStyle? floatingLabelStyle;
   final String? Function(String?)? validator;
@@ -145,6 +147,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
         isDense: widget.isDense,
         helperStyle: widget.helperStyle ?? context.textTheme.bodySmall,
         helperText: widget.helperText,
+        helperMaxLines: widget.helperMaxLines,
         hintText: widget.hintText,
         hintStyle: widget.hintStyle ??
             context.textTheme.bodyMedium!.copyWith(
