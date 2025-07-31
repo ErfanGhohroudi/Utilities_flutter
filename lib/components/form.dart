@@ -5,6 +5,7 @@ class UTextFormField extends StatefulWidget {
     super.key,
     this.enabled = true,
     this.focusNode,
+    this.focusNode = false,
     this.labelText,
     this.hintStyle,
     this.hintText,
@@ -46,6 +47,7 @@ class UTextFormField extends StatefulWidget {
 
   final bool enabled;
   final FocusNode? focusNode;
+  final bool autofocus;
   final bool obscureText;
   final Color? obscureIconColor;
   final bool required;
@@ -102,6 +104,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
     return TextFormField(
       enabled: widget.enabled,
       focusNode: widget.focusNode,
+      autofocus: widget.autofocus,
       autovalidateMode: widget.autovalidateMode,
       textDirection: widget.textDirection ??
           (widget.keyboardType == TextInputType.number ||
