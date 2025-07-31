@@ -5,7 +5,7 @@ class UTextFormField extends StatefulWidget {
     super.key,
     this.enabled = true,
     this.focusNode,
-    this.focusNode = false,
+    this.autofocus = false,
     this.labelText,
     this.hintStyle,
     this.hintText,
