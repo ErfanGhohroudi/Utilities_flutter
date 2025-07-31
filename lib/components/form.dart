@@ -12,6 +12,7 @@ class UTextFormField extends StatefulWidget {
     this.fontSize,
     this.controller,
     this.onTap,
+    this.onTapOutside,
     this.validator,
     this.prefix,
     this.suffix,
@@ -58,6 +59,7 @@ class UTextFormField extends StatefulWidget {
   final int? helperMaxLines;
   final TextStyle? helperStyle;
   final TextStyle? floatingLabelStyle;
+  final void Function(PointerDownEvent event)? onTapOutside;
   final String? Function(String?)? validator;
   final double? fontSize;
   final double? textHeight;
@@ -129,6 +131,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       obscureText: obscure,
+      onTapOutside: widget.onTapOutside ?? (event) => FocusManager.instance.primaryFocus?.unfocus(),
       validator: widget.validator,
       onFieldSubmitted: widget.onFieldSubmitted,
       minLines: widget.minLines,
