@@ -324,6 +324,7 @@ class _UTextFieldPersianDatePickerState extends State<UTextFieldPersianDatePicke
 class UElevatedButton extends StatelessWidget {
   const UElevatedButton({
     super.key,
+    this.enable = true,
     this.title,
     this.titleColor,
     this.progressIndicatorColor,
@@ -342,6 +343,7 @@ class UElevatedButton extends StatelessWidget {
     this.borderColor = Colors.grey,
   });
 
+  final bool enable;
   final String? title;
   final Color? titleColor;
   final Color? progressIndicatorColor;
@@ -363,7 +365,9 @@ class UElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) => ElevatedButton(
         style: ButtonStyle(
           textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
-          backgroundColor: WidgetStateProperty.all(backgroundColor ?? navigatorKey.currentContext!.theme.primaryColor),
+          backgroundColor: WidgetStateProperty.all(
+            enable ? (backgroundColor ?? navigatorKey.currentContext!.theme.primaryColor) : navigatorKey.currentContext!.theme.disabledColor,
+          ),
           padding: WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: horizontalPadding ?? 12)),
           shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
             RoundedRectangleBorder(
