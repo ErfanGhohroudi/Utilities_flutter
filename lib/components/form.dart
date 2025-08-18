@@ -116,13 +116,15 @@ class _UTextFormFieldState extends State<UTextFormField> {
               : null),
       inputFormatters: widget.formatters ??
           [
-            // بلاک کردن حروف فارسی و عربی و فاصله و نیم فاصله
-            if (widget.keyboardType == TextInputType.visiblePassword) FilteringTextInputFormatter.allow(RegExp(r'[!-~\u06F0-\u06F9]')),
-            if (widget.keyboardType == TextInputType.emailAddress) FilteringTextInputFormatter.deny(RegExp(r'[\u0600-\u06FF\s\u200C]')),
-            if (widget.keyboardType == TextInputType.emailAddress) FilteringTextInputFormatter.deny(RegExp(r'\s')), // space not allowed
-            if (widget.keyboardType == TextInputType.url) FilteringTextInputFormatter.deny(RegExp(r'\s')), // space not allowed
-            if (widget.keyboardType == TextInputType.number) FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-            if (widget.keyboardType == TextInputType.phone) FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+            // NoLeadingSpaceInputFormatter(),
+
+            // // بلاک کردن حروف فارسی و عربی و فاصله و نیم فاصله
+            // if (widget.keyboardType == TextInputType.visiblePassword) FilteringTextInputFormatter.allow(RegExp(r'[!-~\u06F0-\u06F9]')),
+            // if (widget.keyboardType == TextInputType.emailAddress) FilteringTextInputFormatter.deny(RegExp(r'[\u0600-\u06FF\s\u200C]')),
+            // if (widget.keyboardType == TextInputType.emailAddress) FilteringTextInputFormatter.deny(RegExp(r'\s')), // space not allowed
+            // if (widget.keyboardType == TextInputType.url) FilteringTextInputFormatter.deny(RegExp(r'\s')), // space not allowed
+            // if (widget.keyboardType == TextInputType.number) FilteringTextInputFormatter.digitsOnly,
+            // if (widget.keyboardType == TextInputType.phone) FilteringTextInputFormatter.digitsOnly,
           ],
       style: context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
       maxLength: widget.maxLength,
