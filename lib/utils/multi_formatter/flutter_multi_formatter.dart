@@ -7,6 +7,7 @@ export 'formatters/formatter_utils.dart';
 export 'formatters/masked_input_formatter.dart';
 export 'formatters/money_input_enums.dart';
 export 'formatters/money_input_formatter.dart';
+export 'formatters/no_leading_space_input_formatter.dart';
 export 'formatters/phone_input_enums.dart';
 export 'formatters/phone_input_formatter.dart';
 export 'formatters/pos_input_formatter.dart';
