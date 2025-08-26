@@ -79,27 +79,39 @@ abstract class UFirebase {
   static Future<void> initializeNotifications({
     required String channelId,
     required String channelName,
+
+    /// example: '@drawable/ic_status_bar_icon'
     required String notificationIcon,
   }) async {
-    // String? _notificationIcon = '@drawable/ic_status_bar_icon';
-    String _notificationIcon = notificationIcon;
-    AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings(_notificationIcon);
-    InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid);
+    // android settings
+    final AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings(notificationIcon);
+
+    // iOS settings
+    final DarwinInitializationSettings initializationSettingsDarwin = const DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+
+    final InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsDarwin,
+    );
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) {
         switch (notificationResponse.notificationResponseType) {
           case NotificationResponseType.selectedNotification:
-          // Core.selectNotificationStream.add(notificationResponse.payload);
-          // push(NotificationPage());
+            // Core.selectNotificationStream.add(notificationResponse.payload);
+            // push(NotificationPage());
             break;
           case NotificationResponseType.selectedNotificationAction:
-          // برای زمانی که نوتیفیکیشن دکمه اکشن داشته باشد
+            // برای زمانی که نوتیفیکیشن دکمه اکشن داشته باشد
 
-          // if (notificationResponse.actionId == Core.navigationActionId) {
-          //   Core.selectNotificationStream.add(notificationResponse.payload);
-          // }
+            // if (notificationResponse.actionId == Core.navigationActionId) {
+            //   Core.selectNotificationStream.add(notificationResponse.payload);
+            // }
 
             break;
         }
