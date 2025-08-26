@@ -58,21 +58,21 @@ Future<void> initUtilities({
     if (preventScreenShot) await ScreenProtector.preventScreenshotOn();
   } catch (e) {}
 
-  EasyLoading.instance
-    ..displayDuration = const Duration(milliseconds: 2000)
-    ..indicatorType = easyLoadingIndicatorType
-    ..indicatorSize = 45.0
-    ..radius = 10.1
-    ..progressColor = easyLoadingPrimaryColor
-    ..backgroundColor = Colors.transparent
-    ..indicatorColor = easyLoadingPrimaryColor
-    ..textColor = Colors.transparent
-    ..maskColor = Colors.blue
-    ..maskType = EasyLoadingMaskType.black
-    ..loadingStyle = EasyLoadingStyle.custom
-    ..userInteractions = false
-    ..boxShadow = <BoxShadow>[]
-    ..dismissOnTap = false;
+  // EasyLoading.instance
+  //   ..displayDuration = const Duration(milliseconds: 2000)
+  //   ..indicatorType = easyLoadingIndicatorType
+  //   ..indicatorSize = 45.0
+  //   ..radius = 10.1
+  //   ..progressColor = easyLoadingPrimaryColor
+  //   ..backgroundColor = Colors.transparent
+  //   ..indicatorColor = easyLoadingPrimaryColor
+  //   ..textColor = Colors.transparent
+  //   ..maskColor = Colors.blue
+  //   ..maskType = EasyLoadingMaskType.black
+  //   ..loadingStyle = EasyLoadingStyle.custom
+  //   ..userInteractions = false
+  //   ..boxShadow = <BoxShadow>[]
+  //   ..dismissOnTap = false;
 }
 
 class UMaterialApp extends StatefulWidget {
