@@ -406,11 +406,14 @@ class UElevatedButton extends StatelessWidget {
                     spacing: 6,
                     children: [
                       if (icon != null) icon!,
-                      titleWidget ??
-                          Text(
-                            title ?? '',
-                            textAlign: TextAlign.center,
-                          ).bodyMedium(color: titleColor ?? Colors.white),
+                      Flexible(
+                        child: titleWidget ??
+                            Text(
+                              title ?? '',
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                            ).bodyMedium(color: titleColor ?? Colors.white, overflow: TextOverflow.ellipsis),
+                      ),
                     ],
                   ),
           ),
