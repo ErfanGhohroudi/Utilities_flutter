@@ -1,13 +1,15 @@
 import 'package:u/utilities.dart';
 
-abstract class UFirebase {
+class UFirebase {
+  UFirebase._();
+
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  static Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    if (kDebugMode) {
-      print('Handling a background message: ${message.messageId}');
-    }
-  }
+  // static Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  //   if (kDebugMode) {
+  //     print('Handling a background message: ${message.messageId}');
+  //   }
+  // }
 
   /// use [setupFirebaseMessaging] in main Rout page
   static void setupFirebaseMessaging({
@@ -40,7 +42,17 @@ abstract class UFirebase {
       );
     }
 
-    FirebaseMessaging.onBackgroundMessage(onBackgroundMessageReceive);
+    // FirebaseMessaging.onBackgroundMessage(onBackgroundMessageReceive);
+
+    // ۱. بررسی باز شدن اپ از حالت کاملاً بسته (Terminated)
+    messaging.getInitialMessage().then((RemoteMessage? message) {
+      if (message != null) {
+        if (kDebugMode) {
+          print("App opened from TERMINATED state by a notification!");
+        }
+        onMessageOpenedApp(message);
+      }
+    });
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       if (message.notification != null) {

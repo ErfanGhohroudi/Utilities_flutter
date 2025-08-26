@@ -1,7 +1,9 @@
 import 'package:u/utilities.dart';
 import 'package:http/http.dart' as http;
 
-abstract class UNotification {
+class UNotification {
+  UNotification._();
+
   static Future<Uint8List?> _getByteArrayFromUrl(String url) async {
     final uri = Uri.tryParse(url);
     if (uri == null) return null;

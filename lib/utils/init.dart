@@ -2,7 +2,9 @@ import 'package:u/utilities.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-abstract class UCore {
+class UCore {
+  UCore._();
+
   static late String apiKey;
   static late String fcmToken;
   static bool isDialogOpen = false;
