@@ -94,6 +94,7 @@ class UFirebase {
 
     /// example: '@drawable/ic_status_bar_icon'
     required String notificationIcon,
+    required Function(NotificationResponse notificationResponse) onNotificationTap,
   }) async {
     // android settings
     final AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings(notificationIcon);
@@ -112,22 +113,7 @@ class UFirebase {
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) {
-        switch (notificationResponse.notificationResponseType) {
-          case NotificationResponseType.selectedNotification:
-            // Core.selectNotificationStream.add(notificationResponse.payload);
-            // push(NotificationPage());
-            break;
-          case NotificationResponseType.selectedNotificationAction:
-            // برای زمانی که نوتیفیکیشن دکمه اکشن داشته باشد
-
-            // if (notificationResponse.actionId == Core.navigationActionId) {
-            //   Core.selectNotificationStream.add(notificationResponse.payload);
-            // }
-
-            break;
-        }
-      },
+      onDidReceiveNotificationResponse: onNotificationTap,
     );
 
     // Create Notification Channel

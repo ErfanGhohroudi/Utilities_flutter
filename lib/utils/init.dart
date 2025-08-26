@@ -11,6 +11,7 @@ class UCore {
 }
 
 Future<void> initUtilities({
+  required Function(NotificationResponse notificationResponse) onNotificationTap,
   final FirebaseOptions? firebaseOptions,
   final String? channelId,
   final String? channelName,
@@ -44,6 +45,7 @@ Future<void> initUtilities({
         channelId: channelId?? '',
         channelName: channelName?? '',
         notificationIcon: notificationIcon,
+        onNotificationTap: onNotificationTap,
       );
 
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
