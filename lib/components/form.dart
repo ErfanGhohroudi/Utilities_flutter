@@ -18,6 +18,9 @@ class UTextFormField extends StatefulWidget {
     this.prefix,
     this.suffix,
     this.suffixText,
+    this.prefixText,
+    this.suffixStyle,
+    this.prefixStyle,
     this.onSave,
     this.onEditingComplete,
     this.initialValue,
@@ -75,6 +78,9 @@ class UTextFormField extends StatefulWidget {
   final Widget? prefix;
   final Widget? suffix;
   final String? suffixText;
+  final String? prefixText;
+  final TextStyle? suffixStyle;
+  final TextStyle? prefixStyle;
   final Function(String? value)? onSave;
   final Function()? onEditingComplete;
   final TextAlign textAlign;
@@ -166,7 +172,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
             ),
         contentPadding: widget.contentPadding,
         counter: widget.showCounter ? null : const SizedBox(),
-        suffixIcon: widget.obscureText
+        suffix: widget.obscureText
             ? IconButton(
                 splashRadius: 1,
                 onPressed: () => setState(() => obscure = !obscure),
@@ -176,8 +182,10 @@ class _UTextFormFieldState extends State<UTextFormField> {
               )
             : widget.suffix,
         suffixText: widget.suffixText,
-        suffixStyle: context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
-        prefixIcon: widget.prefix,
+        suffixStyle: widget.suffixStyle ?? context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
+        prefix: widget.prefix,
+        prefixText: widget.prefixText,
+        prefixStyle: widget.prefixStyle ?? context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
         border: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
         enabledBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
         disabledBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
