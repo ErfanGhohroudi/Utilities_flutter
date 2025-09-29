@@ -108,13 +108,13 @@ cacheExpireDate: cacheExpireDate,
 need to share text, image, widgets, or want to open someone's Telegram, whatsapp.
 
 ```dart
-ULaunch.email("sina@email.com", "hello");
+ULaunch.email("erfan@email.com", "hello");
 ULaunch.call("1234567890");
 ULaunch.sms("1234567890", "some text");
-ULaunch.launchInstagram("sinamn75");
-ULaunch.launchTelegram("sinamn75");
+ULaunch.launchInstagram("username");
+ULaunch.launchTelegram("username");
 ULaunch.launchWhatsApp("1234567890");
-ULaunch.launchURL("https://sinamn75.com");
+ULaunch.launchURL("https://google.com");
 ULaunch.shareText("some text");
 ULaunch.shareWidget(widget: const CircleAvatar());
 ULaunch.launchMap(35.37651, 55.753325);
