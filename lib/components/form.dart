@@ -15,8 +15,10 @@ class UTextFormField extends StatefulWidget {
     this.onTap,
     this.onTapOutside,
     this.validator,
-    this.prefix,
     this.suffix,
+    this.prefix,
+    this.suffixIcon,
+    this.prefixIcon,
     this.suffixText,
     this.prefixText,
     this.suffixStyle,
@@ -75,8 +77,10 @@ class UTextFormField extends StatefulWidget {
   final int? maxLength;
   final EdgeInsetsGeometry? contentPadding;
   final VoidCallback? onTap;
-  final Widget? prefix;
   final Widget? suffix;
+  final Widget? prefix;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final String? suffixText;
   final String? prefixText;
   final TextStyle? suffixStyle;
@@ -172,7 +176,8 @@ class _UTextFormFieldState extends State<UTextFormField> {
             ),
         contentPadding: widget.contentPadding,
         counter: widget.showCounter ? null : const SizedBox(),
-        suffix: widget.obscureText
+        suffix: widget.suffix,
+        suffixIcon: widget.obscureText
             ? IconButton(
                 splashRadius: 1,
                 onPressed: () => setState(() => obscure = !obscure),
@@ -180,10 +185,11 @@ class _UTextFormFieldState extends State<UTextFormField> {
                     ? Icon(Icons.visibility, color: widget.obscureIconColor ?? context.theme.hintColor)
                     : Icon(Icons.visibility_off, color: widget.obscureIconColor ?? context.theme.hintColor),
               )
-            : widget.suffix,
+            : widget.suffixIcon,
         suffixText: widget.suffixText,
         suffixStyle: widget.suffixStyle ?? context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
         prefix: widget.prefix,
+        prefixIcon: widget.prefixIcon,
         prefixText: widget.prefixText,
         prefixStyle: widget.prefixStyle ?? context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
         border: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
