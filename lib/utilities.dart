@@ -52,7 +52,7 @@ export 'package:u/utilities.dart';
 export 'package:url_launcher/url_launcher.dart';
 export 'package:uuid/uuid.dart';
 export 'package:video_player/video_player.dart';
-export 'package:webview_flutter/webview_flutter.dart';
+export 'package:webview_flutter/webview_flutter.dart' hide X509Certificate;
 export 'package:shimmer/shimmer.dart';
 
 export 'components/badges.dart';
