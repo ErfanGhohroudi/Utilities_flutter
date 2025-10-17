@@ -15,12 +15,12 @@ class UTextFormField extends StatefulWidget {
     this.onTap,
     this.onTapOutside,
     this.validator,
-    this.suffix,
     this.prefix,
-    this.suffixIcon,
-    this.prefixIcon,
+    this.suffix,
     this.suffixText,
+    this.suffixIcon,
     this.prefixText,
+    this.prefixIcon,
     this.suffixStyle,
     this.prefixStyle,
     this.onSave,
@@ -77,12 +77,12 @@ class UTextFormField extends StatefulWidget {
   final int? maxLength;
   final EdgeInsetsGeometry? contentPadding;
   final VoidCallback? onTap;
-  final Widget? suffix;
   final Widget? prefix;
-  final Widget? suffixIcon;
-  final Widget? prefixIcon;
+  final Widget? suffix;
   final String? suffixText;
+  final Widget? suffixIcon;
   final String? prefixText;
+  final Widget? prefixIcon;
   final TextStyle? suffixStyle;
   final TextStyle? prefixStyle;
   final Function(String? value)? onSave;
@@ -176,7 +176,6 @@ class _UTextFormFieldState extends State<UTextFormField> {
             ),
         contentPadding: widget.contentPadding,
         counter: widget.showCounter ? null : const SizedBox(),
-        suffix: widget.suffix,
         suffixIcon: widget.obscureText
             ? IconButton(
                 splashRadius: 1,
@@ -185,13 +184,12 @@ class _UTextFormFieldState extends State<UTextFormField> {
                     ? Icon(Icons.visibility, color: widget.obscureIconColor ?? context.theme.hintColor)
                     : Icon(Icons.visibility_off, color: widget.obscureIconColor ?? context.theme.hintColor),
               )
-            : widget.suffixIcon,
+            : (widget.suffixIcon ?? widget.suffix),
         suffixText: widget.suffixText,
         suffixStyle: widget.suffixStyle ?? context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
-        prefix: widget.prefix,
-        prefixIcon: widget.prefixIcon,
+        prefixIcon: widget.prefixIcon ?? widget.prefix,
         prefixText: widget.prefixText,
-        prefixStyle: widget.prefixStyle ?? context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
+        prefixStyle: widget.prefixStyle,
         border: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
         enabledBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
         disabledBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
