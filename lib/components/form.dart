@@ -176,6 +176,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
             ),
         contentPadding: widget.contentPadding,
         counter: widget.showCounter ? null : const SizedBox(),
+        suffix: widget.suffix,
         suffixIcon: widget.obscureText
             ? IconButton(
                 splashRadius: 1,
@@ -184,10 +185,11 @@ class _UTextFormFieldState extends State<UTextFormField> {
                     ? Icon(Icons.visibility, color: widget.obscureIconColor ?? context.theme.hintColor)
                     : Icon(Icons.visibility_off, color: widget.obscureIconColor ?? context.theme.hintColor),
               )
-            : (widget.suffixIcon ?? widget.suffix),
+            : widget.suffixIcon,
         suffixText: widget.suffixText,
         suffixStyle: widget.suffixStyle ?? context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
-        prefixIcon: widget.prefixIcon ?? widget.prefix,
+        prefix: widget.prefix,
+        prefixIcon: widget.prefixIcon,
         prefixText: widget.prefixText,
         prefixStyle: widget.prefixStyle,
         border: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
