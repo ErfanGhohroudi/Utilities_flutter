@@ -15,6 +15,7 @@ class UFirebase {
   static void setupFirebaseMessaging({
     required String channelId,
     required String channelName,
+    required String? icon,
     required Function(RemoteMessage message) onMessageOpenedApp,
     required Future<void> Function(RemoteMessage message) onBackgroundMessageReceive,
     Function(RemoteMessage message)? onReceiveNotificationWhenInApp,
@@ -61,6 +62,7 @@ class UFirebase {
           message,
           channelId: channelId,
           channelName: channelName,
+          icon: icon,
           onReceiveNotificationWhenInApp: onReceiveNotificationWhenInApp,
         );
       }

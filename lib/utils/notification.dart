@@ -15,6 +15,7 @@ class UNotification {
     RemoteMessage message, {
     required String channelId,
     required String channelName,
+    required String? icon,
     Function(RemoteMessage message)? onReceiveNotificationWhenInApp,
   }) async {
     final FlutterLocalNotificationsPlugin notificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -53,6 +54,7 @@ class UNotification {
         channelId,
         channelName,
         channelDescription: 'This channel is used for important notifications.',
+        icon: icon,
         largeIcon: largeIcon,
         importance: Importance.max,
         priority: Priority.high,
