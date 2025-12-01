@@ -12,12 +12,12 @@ class UNotification {
   }
 
   static Future<void> showLocalNotification(
-    RemoteMessage message, {
-    required String channelId,
-    required String channelName,
-    required String? icon,
-    Function(RemoteMessage message)? onReceiveNotificationWhenInApp,
-  }) async {
+      RemoteMessage message, {
+        required String channelId,
+        required String channelName,
+        required String? icon,
+        Function(RemoteMessage message)? onReceiveNotificationWhenInApp,
+      }) async {
     final FlutterLocalNotificationsPlugin notificationsPlugin = FlutterLocalNotificationsPlugin();
     RemoteNotification? notification = message.notification;
     if (kDebugMode) {
@@ -96,7 +96,7 @@ class UNotification {
         notification.title,
         notification.body,
         platformChannelSpecifics,
-        payload: message.data.toString(),
+        payload: jsonEncode(message.data),
       );
     }
   }
