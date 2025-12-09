@@ -24,20 +24,20 @@ class PersianInputDatePickerFormField extends StatefulWidget {
         firstDate = PersianDateUtils.dateOnly(firstDate),
         lastDate = PersianDateUtils.dateOnly(lastDate) {
     assert(
-      !this.lastDate.isBefore(this.firstDate),
-      'lastDate ${this.lastDate} must be on or after firstDate ${this.firstDate}.',
+    !this.lastDate.isBefore(this.firstDate),
+    'lastDate ${this.lastDate} must be on or after firstDate ${this.firstDate}.',
     );
     assert(
-      initialDate == null || !this.initialDate!.isBefore(this.firstDate),
-      'initialDate ${this.initialDate} must be on or after firstDate ${this.firstDate}.',
+    initialDate == null || !this.initialDate!.isBefore(this.firstDate),
+    'initialDate ${this.initialDate} must be on or after firstDate ${this.firstDate}.',
     );
     assert(
-      initialDate == null || !this.initialDate!.isAfter(this.lastDate),
-      'initialDate ${this.initialDate} must be on or before lastDate ${this.lastDate}.',
+    initialDate == null || !this.initialDate!.isAfter(this.lastDate),
+    'initialDate ${this.initialDate} must be on or before lastDate ${this.lastDate}.',
     );
     assert(
-      selectableDayPredicate == null || initialDate == null || selectableDayPredicate!(this.initialDate!),
-      'Provided initialDate ${this.initialDate} must satisfy provided selectableDayPredicate.',
+    selectableDayPredicate == null || initialDate == null || selectableDayPredicate!(this.initialDate!),
+    'Provided initialDate ${this.initialDate} must satisfy provided selectableDayPredicate.',
     );
   }
 
@@ -118,9 +118,9 @@ class _InputDatePickerFormFieldState extends State<PersianInputDatePickerFormFie
       if (widget.autofocus && !_autoSelected) {
         textEditingValue = textEditingValue.copyWith(
             selection: TextSelection(
-          baseOffset: 0,
-          extentOffset: _inputText!.length,
-        ));
+              baseOffset: 0,
+              extentOffset: _inputText!.length,
+            ));
         _autoSelected = true;
       }
       _controller.value = textEditingValue;
@@ -174,7 +174,7 @@ class _InputDatePickerFormFieldState extends State<PersianInputDatePickerFormFie
     final bool useMaterial3 = theme.useMaterial3;
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
     final DatePickerThemeData datePickerTheme = theme.datePickerTheme;
-    final InputDecorationTheme inputTheme = theme.inputDecorationTheme;
+    final InputDecorationThemeData inputTheme = theme.inputDecorationTheme;
     final InputBorder effectiveInputBorder = datePickerTheme.inputDecorationTheme?.border ?? theme.inputDecorationTheme.border ?? (useMaterial3 ? const OutlineInputBorder() : const UnderlineInputBorder());
 
     return Semantics(

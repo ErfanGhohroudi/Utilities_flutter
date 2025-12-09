@@ -56,20 +56,20 @@ Future<Jalali?> showPersianDatePicker({
   firstDate = PersianDateUtils.dateOnly(firstDate);
   lastDate = PersianDateUtils.dateOnly(lastDate);
   assert(
-    !lastDate.isBefore(firstDate),
-    'lastDate $lastDate must be on or after firstDate $firstDate.',
+  !lastDate.isBefore(firstDate),
+  'lastDate $lastDate must be on or after firstDate $firstDate.',
   );
   assert(
-    initialDate == null || !initialDate.isBefore(firstDate),
-    'initialDate $initialDate must be on or after firstDate $firstDate.',
+  initialDate == null || !initialDate.isBefore(firstDate),
+  'initialDate $initialDate must be on or after firstDate $firstDate.',
   );
   assert(
-    initialDate == null || !initialDate.isAfter(lastDate),
-    'initialDate $initialDate must be on or before lastDate $lastDate.',
+  initialDate == null || !initialDate.isAfter(lastDate),
+  'initialDate $initialDate must be on or before lastDate $lastDate.',
   );
   assert(
-    selectableDayPredicate == null || initialDate == null || selectableDayPredicate(initialDate),
-    'Provided initialDate $initialDate must satisfy provided selectableDayPredicate.',
+  selectableDayPredicate == null || initialDate == null || selectableDayPredicate(initialDate),
+  'Provided initialDate $initialDate must satisfy provided selectableDayPredicate.',
   );
   assert(debugCheckHasMaterialLocalizations(context));
 
@@ -154,25 +154,26 @@ class PersianDatePickerDialog extends StatefulWidget {
     this.onDatePickerModeChange,
     this.switchToInputEntryModeIcon,
     this.switchToCalendarEntryModeIcon,
-  })  : initialDate = initialDate == null ? null : PersianDateUtils.dateOnly(initialDate),
+  })
+      : initialDate = initialDate == null ? null : PersianDateUtils.dateOnly(initialDate),
         firstDate = PersianDateUtils.dateOnly(firstDate),
         lastDate = PersianDateUtils.dateOnly(lastDate),
         currentDate = PersianDateUtils.dateOnly(currentDate ?? Jalali.now()) {
     assert(
-      !this.lastDate.isBefore(this.firstDate),
-      'lastDate ${this.lastDate} must be on or after firstDate ${this.firstDate}.',
+    !this.lastDate.isBefore(this.firstDate),
+    'lastDate ${this.lastDate} must be on or after firstDate ${this.firstDate}.',
     );
     assert(
-      initialDate == null || !this.initialDate!.isBefore(this.firstDate),
-      'initialDate ${this.initialDate} must be on or after firstDate ${this.firstDate}.',
+    initialDate == null || !this.initialDate!.isBefore(this.firstDate),
+    'initialDate ${this.initialDate} must be on or after firstDate ${this.firstDate}.',
     );
     assert(
-      initialDate == null || !this.initialDate!.isAfter(this.lastDate),
-      'initialDate ${this.initialDate} must be on or before lastDate ${this.lastDate}.',
+    initialDate == null || !this.initialDate!.isAfter(this.lastDate),
+    'initialDate ${this.initialDate} must be on or before lastDate ${this.lastDate}.',
     );
     assert(
-      selectableDayPredicate == null || initialDate == null || selectableDayPredicate!(this.initialDate!),
-      'Provided initialDate ${this.initialDate} must satisfy provided selectableDayPredicate',
+    selectableDayPredicate == null || initialDate == null || selectableDayPredicate!(this.initialDate!),
+    'Provided initialDate ${this.initialDate} must satisfy provided selectableDayPredicate',
     );
   }
 
@@ -289,7 +290,9 @@ class _PersianDatePickerDialogState extends State<PersianDatePickerDialog> with 
   }
 
   Size _dialogSize(BuildContext context) {
-    final bool useMaterial3 = Theme.of(context).useMaterial3;
+    final bool useMaterial3 = Theme
+        .of(context)
+        .useMaterial3;
     final bool isCalendar = switch (_entryMode.value) {
       PersianDatePickerEntryMode.calendar || PersianDatePickerEntryMode.calendarOnly => true,
       PersianDatePickerEntryMode.input || PersianDatePickerEntryMode.inputOnly => false,
@@ -516,9 +519,7 @@ class _PersianDatePickerDialogState extends State<PersianDatePickerDialog> with 
 }
 
 class _RestorableDatePickerEntryMode extends RestorableValue<PersianDatePickerEntryMode> {
-  _RestorableDatePickerEntryMode(
-    PersianDatePickerEntryMode defaultValue,
-  ) : _defaultValue = defaultValue;
+  _RestorableDatePickerEntryMode(PersianDatePickerEntryMode defaultValue,) : _defaultValue = defaultValue;
 
   final PersianDatePickerEntryMode _defaultValue;
 
@@ -539,9 +540,7 @@ class _RestorableDatePickerEntryMode extends RestorableValue<PersianDatePickerEn
 }
 
 class _RestorableAutovalidateMode extends RestorableValue<AutovalidateMode> {
-  _RestorableAutovalidateMode(
-    AutovalidateMode defaultValue,
-  ) : _defaultValue = defaultValue;
+  _RestorableAutovalidateMode(AutovalidateMode defaultValue,) : _defaultValue = defaultValue;
 
   final AutovalidateMode _defaultValue;
 
@@ -681,10 +680,10 @@ class _DatePickerHeader extends StatelessWidget {
                     Padding(
                       padding: theme.useMaterial3
                           ? const EdgeInsetsDirectional.only(
-                              start: 8.0,
-                              end: 4.0,
-                              bottom: 6.0,
-                            )
+                        start: 8.0,
+                        end: 4.0,
+                        bottom: 6.0,
+                      )
                           : const EdgeInsets.symmetric(horizontal: 4),
                       child: Semantics(
                         container: true,
@@ -733,31 +732,31 @@ Future<JalaliRange?> showPersianDateRangePicker({
   required Jalali initialDate,
 }) async {
   assert(
-    initialDateRange == null || !initialDateRange.start.isAfter(initialDateRange.end),
-    "initialDateRange's start date must not be after it's end date.",
+  initialDateRange == null || !initialDateRange.start.isAfter(initialDateRange.end),
+  "initialDateRange's start date must not be after it's end date.",
   );
   initialDateRange = initialDateRange == null ? null : PersianDateUtils.datesOnly(initialDateRange);
   firstDate = PersianDateUtils.dateOnly(firstDate);
   lastDate = PersianDateUtils.dateOnly(lastDate);
   assert(
-    !lastDate.isBefore(firstDate),
-    'lastDate $lastDate must be on or after firstDate $firstDate.',
+  !lastDate.isBefore(firstDate),
+  'lastDate $lastDate must be on or after firstDate $firstDate.',
   );
   assert(
-    initialDateRange == null || !initialDateRange.start.isBefore(firstDate),
-    "initialDateRange's start date must be on or after firstDate $firstDate.",
+  initialDateRange == null || !initialDateRange.start.isBefore(firstDate),
+  "initialDateRange's start date must be on or after firstDate $firstDate.",
   );
   assert(
-    initialDateRange == null || !initialDateRange.end.isBefore(firstDate),
-    "initialDateRange's end date must be on or after firstDate $firstDate.",
+  initialDateRange == null || !initialDateRange.end.isBefore(firstDate),
+  "initialDateRange's end date must be on or after firstDate $firstDate.",
   );
   assert(
-    initialDateRange == null || !initialDateRange.start.isAfter(lastDate),
-    "initialDateRange's start date must be on or before lastDate $lastDate.",
+  initialDateRange == null || !initialDateRange.start.isAfter(lastDate),
+  "initialDateRange's start date must be on or before lastDate $lastDate.",
   );
   assert(
-    initialDateRange == null || !initialDateRange.end.isAfter(lastDate),
-    "initialDateRange's end date must be on or before lastDate $lastDate.",
+  initialDateRange == null || !initialDateRange.end.isAfter(lastDate),
+  "initialDateRange's end date must be on or before lastDate $lastDate.",
   );
   currentDate = PersianDateUtils.dateOnly(currentDate ?? Jalali.now());
   assert(debugCheckHasMaterialLocalizations(context));
@@ -818,16 +817,16 @@ String _formatRangeStartDate(MaterialLocalizations localizations, Jalali? startD
   return startDate == null
       ? localizations.dateRangeStartLabel
       : (endDate == null || startDate.year == endDate.year)
-          ? localizations.formatShortMonthDay(startDate.toDateTime())
-          : localizations.formatShortDate(startDate.toDateTime());
+      ? localizations.formatShortMonthDay(startDate.toDateTime())
+      : localizations.formatShortDate(startDate.toDateTime());
 }
 
 String _formatRangeEndDate(MaterialLocalizations localizations, Jalali? startDate, Jalali? endDate, Jalali currentDate) {
   return endDate == null
       ? localizations.dateRangeEndLabel
       : (startDate != null && startDate.year == endDate.year && startDate.year == currentDate.year)
-          ? localizations.formatShortMonthDay(endDate.toDateTime())
-          : localizations.formatShortDate(endDate.toDateTime());
+      ? localizations.formatShortMonthDay(endDate.toDateTime())
+      : localizations.formatShortDate(endDate.toDateTime());
 }
 
 class PersianDateRangePickerDialog extends StatefulWidget {
@@ -1016,11 +1015,11 @@ class _PersianDateRangePickerDialogState extends State<PersianDateRangePickerDia
           onCancel: _handleCancel,
           entryModeButton: showEntryModeButton
               ? IconButton(
-                  icon: widget.switchToInputEntryModeIcon ?? Icon(useMaterial3 ? Icons.edit_outlined : Icons.edit),
-                  padding: EdgeInsets.zero,
-                  tooltip: localizations.inputDateModeButtonLabel,
-                  onPressed: _handleEntryModeToggle,
-                )
+            icon: widget.switchToInputEntryModeIcon ?? Icon(useMaterial3 ? Icons.edit_outlined : Icons.edit),
+            padding: EdgeInsets.zero,
+            tooltip: localizations.inputDateModeButtonLabel,
+            onPressed: _handleEntryModeToggle,
+          )
               : null,
           confirmText: widget.saveText ?? (useMaterial3 ? localizations.saveButtonLabel : localizations.saveButtonLabel.toUpperCase()),
           helpText: widget.helpText ?? (useMaterial3 ? localizations.dateRangePickerHelpText : localizations.dateRangePickerHelpText.toUpperCase()),
@@ -1074,11 +1073,11 @@ class _PersianDateRangePickerDialogState extends State<PersianDateRangePickerDia
           onCancel: _handleCancel,
           entryModeButton: showEntryModeButton
               ? IconButton(
-                  icon: widget.switchToCalendarEntryModeIcon ?? const Icon(Icons.calendar_today),
-                  padding: EdgeInsets.zero,
-                  tooltip: localizations.calendarModeButtonLabel,
-                  onPressed: _handleEntryModeToggle,
-                )
+            icon: widget.switchToCalendarEntryModeIcon ?? const Icon(Icons.calendar_today),
+            padding: EdgeInsets.zero,
+            tooltip: localizations.calendarModeButtonLabel,
+            onPressed: _handleEntryModeToggle,
+          )
               : null,
           confirmText: widget.confirmText ?? localizations.okButtonLabel,
           cancelText: widget.cancelText ?? (useMaterial3 ? localizations.cancelButtonLabel : localizations.cancelButtonLabel.toUpperCase()),
@@ -1199,7 +1198,9 @@ class _CalendarRangePickerDialog extends StatelessWidget {
           bottom: PreferredSize(
             preferredSize: const Size(double.infinity, 64),
             child: Row(children: <Widget>[
-              SizedBox(width: MediaQuery.sizeOf(context).width < 360 ? 42 : 72),
+              SizedBox(width: MediaQuery
+                  .sizeOf(context)
+                  .width < 360 ? 42 : 72),
               Expanded(
                 child: Semantics(
                   label: '$helpText $startDateText to $endDateText',
@@ -1286,18 +1287,19 @@ class _CalendarDateRangePicker extends StatefulWidget {
     Jalali? currentDate,
     required this.onStartDateChanged,
     required this.onEndDateChanged,
-  })  : initialStartDate = initialStartDate != null ? PersianDateUtils.dateOnly(initialStartDate) : null,
+  })
+      : initialStartDate = initialStartDate != null ? PersianDateUtils.dateOnly(initialStartDate) : null,
         initialEndDate = initialEndDate != null ? PersianDateUtils.dateOnly(initialEndDate) : null,
         firstDate = PersianDateUtils.dateOnly(firstDate),
         lastDate = PersianDateUtils.dateOnly(lastDate),
         currentDate = PersianDateUtils.dateOnly(currentDate ?? Jalali.now()) {
     assert(
-      this.initialStartDate == null || this.initialEndDate == null || !this.initialStartDate!.isAfter(initialEndDate!),
-      'initialStartDate must be on or before initialEndDate.',
+    this.initialStartDate == null || this.initialEndDate == null || !this.initialStartDate!.isAfter(initialEndDate!),
+    'initialStartDate must be on or before initialEndDate.',
     );
     assert(
-      !this.lastDate.isBefore(this.firstDate),
-      'firstDate must be on or before lastDate.',
+    !this.lastDate.isBefore(this.firstDate),
+    'firstDate must be on or before lastDate.',
     );
   }
 
@@ -1365,7 +1367,9 @@ class _CalendarDateRangePickerState extends State<_CalendarDateRangePicker> {
   int get _numberOfMonths => PersianDateUtils.monthDelta(widget.firstDate, widget.lastDate) + 1;
 
   void _vibrate() {
-    switch (Theme.of(context).platform) {
+    switch (Theme
+        .of(context)
+        .platform) {
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
         HapticFeedback.vibrate();
@@ -1429,14 +1433,14 @@ class _CalendarDateRangePickerState extends State<_CalendarDateRangePicker> {
               slivers: <Widget>[
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) => _buildMonthItem(context, index, true),
+                        (BuildContext context, int index) => _buildMonthItem(context, index, true),
                     childCount: _initialMonthIndex,
                   ),
                 ),
                 SliverList(
                   key: sliverAfterKey,
                   delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) => _buildMonthItem(context, index, false),
+                        (BuildContext context, int index) => _buildMonthItem(context, index, false),
                     childCount: _numberOfMonths - _initialMonthIndex,
                   ),
                 ),
@@ -1656,7 +1660,8 @@ class _MonthSliverGridLayout extends SliverGridLayout {
     required this.dayChildWidth,
     required this.edgeChildWidth,
     required this.reverseCrossAxis,
-  })  : assert(crossAxisCount > 0),
+  })
+      : assert(crossAxisCount > 0),
         assert(dayChildWidth >= 0),
         assert(edgeChildWidth >= 0);
 
@@ -1726,7 +1731,8 @@ class _MonthItem extends StatefulWidget {
     required this.firstDate,
     required this.lastDate,
     required this.displayedMonth,
-  })  : assert(!firstDate.isAfter(lastDate)),
+  })
+      : assert(!firstDate.isAfter(lastDate)),
         assert(selectedDateStart == null || !selectedDateStart.isBefore(firstDate)),
         assert(selectedDateEnd == null || !selectedDateEnd.isBefore(firstDate)),
         assert(selectedDateStart == null || !selectedDateStart.isAfter(lastDate)),
@@ -1760,14 +1766,16 @@ class _MonthItemState extends State<_MonthItem> {
     final int daysInMonth = PersianDateUtils.getDaysInMonth(widget.displayedMonth.year, widget.displayedMonth.month);
     _dayFocusNodes = List<FocusNode>.generate(
       daysInMonth,
-      (int index) => FocusNode(skipTraversal: true, debugLabel: 'Day ${index + 1}'),
+          (int index) => FocusNode(skipTraversal: true, debugLabel: 'Day ${index + 1}'),
     );
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final Jalali? focusedDate = _FocusedDate.maybeOf(context)?.date;
+    final Jalali? focusedDate = _FocusedDate
+        .maybeOf(context)
+        ?.date;
     if (focusedDate != null && PersianDateUtils.isSameMonth(widget.displayedMonth, focusedDate)) {
       _dayFocusNodes[focusedDate.day - 1].requestFocus();
     }
@@ -1782,12 +1790,18 @@ class _MonthItemState extends State<_MonthItem> {
   }
 
   Color _highlightColor(BuildContext context) {
-    return DatePickerTheme.of(context).rangeSelectionBackgroundColor ?? DatePickerTheme.defaults(context).rangeSelectionBackgroundColor!;
+    return DatePickerTheme
+        .of(context)
+        .rangeSelectionBackgroundColor ?? DatePickerTheme
+        .defaults(context)
+        .rangeSelectionBackgroundColor!;
   }
 
   void _dayFocusChanged(bool focused) {
     if (focused) {
-      final TraversalDirection? focusDirection = _FocusedDate.maybeOf(context)?.scrollDirection;
+      final TraversalDirection? focusDirection = _FocusedDate
+          .maybeOf(context)
+          ?.scrollDirection;
       if (focusDirection != null) {
         ScrollPositionAlignmentPolicy policy = ScrollPositionAlignmentPolicy.explicit;
         switch (focusDirection) {
@@ -1878,13 +1892,15 @@ class _MonthItemState extends State<_MonthItem> {
 
       final Jalali dateAfterLeadingPadding = Jalali(year, month, 1).addDays(start - dayOffset);
 
-      final bool isLeadingInRange = !(dayOffset > 0 && i == 0) && widget.selectedDateStart != null && widget.selectedDateEnd != null && dateAfterLeadingPadding.isAfter(widget.selectedDateStart!) && !dateAfterLeadingPadding.isAfter(widget.selectedDateEnd!);
+      final bool isLeadingInRange = !(dayOffset > 0 && i == 0) && widget.selectedDateStart != null && widget.selectedDateEnd != null &&
+          dateAfterLeadingPadding.isAfter(widget.selectedDateStart!) && !dateAfterLeadingPadding.isAfter(widget.selectedDateEnd!);
       weekList.insert(0, _buildEdgeBox(context, isLeadingInRange));
 
       if (end < dayItems.length || (end == dayItems.length && dayItems.length % JalaliExt.daysPerWeek == 0)) {
         final Jalali dateBeforeTrailingPadding = Jalali(year, month, 1).addDays(end - dayOffset - 1);
 
-        final bool isTrailingInRange = widget.selectedDateStart != null && widget.selectedDateEnd != null && !dateBeforeTrailingPadding.isBefore(widget.selectedDateStart!) && dateBeforeTrailingPadding.isBefore(widget.selectedDateEnd!);
+        final bool isTrailingInRange = widget.selectedDateStart != null && widget.selectedDateEnd != null &&
+            !dateBeforeTrailingPadding.isBefore(widget.selectedDateStart!) && dateBeforeTrailingPadding.isBefore(widget.selectedDateEnd!);
         weekList.add(_buildEdgeBox(context, isTrailingInRange));
       }
 
@@ -2002,7 +2018,7 @@ class _DayItemState extends State<_DayItem> {
 
     T? resolve<T>(WidgetStateProperty<T>? Function(DatePickerThemeData? theme) getProperty, Set<WidgetState> states) {
       return effectiveValue(
-        (DatePickerThemeData? theme) {
+            (DatePickerThemeData? theme) {
           return getProperty(theme)?.resolve(states);
         },
       );
@@ -2017,8 +2033,9 @@ class _DayItemState extends State<_DayItem> {
 
     final Color? dayForegroundColor = resolve<Color?>((DatePickerThemeData? theme) => theme?.dayForegroundColor, states);
     final Color? dayBackgroundColor = resolve<Color?>((DatePickerThemeData? theme) => theme?.dayBackgroundColor, states);
-    final WidgetStateProperty<Color?> dayOverlayColor = WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) => effectiveValue(
-          (DatePickerThemeData? theme) => widget.isInRange ? theme?.rangeSelectionOverlayColor?.resolve(states) : theme?.dayOverlayColor?.resolve(states),
+    final WidgetStateProperty<Color?> dayOverlayColor = WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) =>
+        effectiveValue(
+              (DatePickerThemeData? theme) => widget.isInRange ? theme?.rangeSelectionOverlayColor?.resolve(states) : theme?.dayOverlayColor?.resolve(states),
         ));
 
     _HighlightPainter? highlightPainter;
@@ -2190,19 +2207,25 @@ class _InputPersianDateRangePickerDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool useMaterial3 = Theme.of(context).useMaterial3;
+    final bool useMaterial3 = Theme
+        .of(context)
+        .useMaterial3;
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
     final Orientation orientation = MediaQuery.orientationOf(context);
     final DatePickerThemeData datePickerTheme = DatePickerTheme.of(context);
     final DatePickerThemeData defaults = DatePickerTheme.defaults(context);
 
-    TextStyle? headlineStyle = (orientation == Orientation.portrait) ? datePickerTheme.headerHeadlineStyle ?? defaults.headerHeadlineStyle : Theme.of(context).textTheme.headlineSmall;
+    TextStyle? headlineStyle = (orientation == Orientation.portrait) ? datePickerTheme.headerHeadlineStyle ?? defaults.headerHeadlineStyle : Theme
+        .of(context)
+        .textTheme
+        .headlineSmall;
 
     final Color? headerForegroundColor = datePickerTheme.headerForegroundColor ?? defaults.headerForegroundColor;
     headlineStyle = headlineStyle?.copyWith(color: headerForegroundColor);
 
     final String dateText = _formatDateRange(context, selectedStartDate, selectedEndDate, currentDate!);
-    final String semanticDateText = selectedStartDate != null && selectedEndDate != null ? '${localizations.formatMediumDate(selectedStartDate!.toDateTime())} – ${localizations.formatMediumDate(selectedEndDate!.toDateTime())}' : '';
+    final String semanticDateText = selectedStartDate != null && selectedEndDate != null ? '${localizations.formatMediumDate(
+        selectedStartDate!.toDateTime())} – ${localizations.formatMediumDate(selectedEndDate!.toDateTime())}' : '';
 
     final Widget header = _DatePickerHeader(
       helpText: helpText ?? (useMaterial3 ? localizations.dateRangePickerHelpText : localizations.dateRangePickerHelpText.toUpperCase()),
@@ -2301,7 +2324,8 @@ class _InputDateRangePicker extends StatefulWidget {
     this.autofocus = false,
     this.autovalidate = false,
     this.keyboardType = TextInputType.datetime,
-  })  : initialStartDate = initialStartDate == null ? null : PersianDateUtils.dateOnly(initialStartDate),
+  })
+      : initialStartDate = initialStartDate == null ? null : PersianDateUtils.dateOnly(initialStartDate),
         initialEndDate = initialEndDate == null ? null : PersianDateUtils.dateOnly(initialEndDate),
         firstDate = PersianDateUtils.dateOnly(firstDate),
         lastDate = PersianDateUtils.dateOnly(lastDate);
@@ -2393,7 +2417,9 @@ class _InputDateRangePickerState extends State<_InputDateRangePicker> {
     final String? endError = _validateDate(_endDate);
     if (startError == null && endError == null) {
       if (_startDate!.isAfter(_endDate!)) {
-        startError = widget.errorInvalidRangeText ?? MaterialLocalizations.of(context).invalidDateRangeLabel;
+        startError = widget.errorInvalidRangeText ?? MaterialLocalizations
+            .of(context)
+            .invalidDateRangeLabel;
       }
     }
     setState(() {
@@ -2409,9 +2435,13 @@ class _InputDateRangePickerState extends State<_InputDateRangePicker> {
 
   String? _validateDate(Jalali? date) {
     if (date == null) {
-      return widget.errorFormatText ?? MaterialLocalizations.of(context).invalidDateFormatLabel;
+      return widget.errorFormatText ?? MaterialLocalizations
+          .of(context)
+          .invalidDateFormatLabel;
     } else if (date.isBefore(widget.firstDate) || date.isAfter(widget.lastDate)) {
-      return widget.errorInvalidText ?? MaterialLocalizations.of(context).dateOutOfRangeLabel;
+      return widget.errorInvalidText ?? MaterialLocalizations
+          .of(context)
+          .dateOutOfRangeLabel;
     }
     return null;
   }
@@ -2421,9 +2451,9 @@ class _InputDateRangePickerState extends State<_InputDateRangePicker> {
     if (selectText) {
       textEditingValue = textEditingValue.copyWith(
           selection: TextSelection(
-        baseOffset: 0,
-        extentOffset: text.length,
-      ));
+            baseOffset: 0,
+            extentOffset: text.length,
+          ));
     }
     controller.value = textEditingValue;
   }
@@ -2455,7 +2485,7 @@ class _InputDateRangePickerState extends State<_InputDateRangePicker> {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
-    final InputDecorationTheme inputTheme = theme.inputDecorationTheme;
+    final InputDecorationThemeData inputTheme = theme.inputDecorationTheme;
     final InputBorder inputBorder = inputTheme.border ?? (useMaterial3 ? const OutlineInputBorder() : const UnderlineInputBorder());
 
     return Row(

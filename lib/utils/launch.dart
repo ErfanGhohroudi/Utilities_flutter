@@ -38,9 +38,9 @@ abstract class ULaunch {
               .join('&'))
       .toString());
 
-  static void shareText(final String text, {final String? subject}) => Share.share(text, subject: subject);
+  static void shareText(final String text, {final String? subject}) => SharePlus.instance.share(ShareParams(text: text, subject: subject));
 
-  static void shareFile(final List<String> file, final String text) => Share.shareXFiles(file.map(XFile.new).toList());
+  static void shareFile(final List<String> file, final String text) => SharePlus.instance.share(ShareParams(text: text, files: file.map(XFile.new).toList()));
 
   static void shareWidget({
     required final Widget widget,
