@@ -6,6 +6,7 @@ class UTextFormField extends StatefulWidget {
     this.enabled = true,
     this.focusNode,
     this.autofocus = false,
+    this.alignLabelWithHint = true,
     this.labelText,
     this.hintStyle,
     this.hintText,
@@ -53,6 +54,7 @@ class UTextFormField extends StatefulWidget {
   final bool enabled;
   final FocusNode? focusNode;
   final bool autofocus;
+  final bool alignLabelWithHint;
   final bool obscureText;
   final Color? obscureIconColor;
   final bool required;
@@ -154,7 +156,7 @@ class _UTextFormFieldState extends State<UTextFormField> {
       minLines: widget.minLines,
       maxLines: widget.maxLines ?? (widget.minLines == 1 ? 1 : 20),
       decoration: InputDecoration(
-        alignLabelWithHint: true,
+        alignLabelWithHint: widget.alignLabelWithHint,
         fillColor: context.theme.dividerColor.withAlpha(50),
         filled: !widget.enabled,
         labelText: widget.labelText != null ? "${widget.labelText}${widget.required ? '*' : ''}" : null,
