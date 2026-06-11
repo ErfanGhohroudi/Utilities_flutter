@@ -542,93 +542,78 @@ class UTextFieldTypeAhead<T> extends StatelessWidget {
 
 class UOtpField extends StatelessWidget {
   const UOtpField({
+    super.key,
+    required this.pinController,
     this.length = 4,
     this.autoFocus = false,
-    this.controller,
-    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
-    this.hintCharacter,
     this.onCompleted,
-    this.borderRadius = 8,
-    this.shape = PinCodeFieldShape.box,
-    this.fieldOuterPadding,
-    this.fieldHeight = 64,
+    this.validator,
     this.fieldWidth = 60,
+    this.fieldHeight = 64,
+    this.borderRadius = 8,
     this.fillColor,
     this.borderColor,
     this.activeColor,
     this.cursorColor,
-    this.onTap,
-    this.validator,
-    this.errorAnimationController,
-    this.errorTextDirection = TextDirection.ltr,
     this.textStyle,
     this.hintStyle,
-    super.key,
+    this.onTap,
+    this.theme,
+    this.keyboardType,
   });
 
+  final PinInputController pinController;
   final int length;
   final bool autoFocus;
-  final TextEditingController? controller;
-  final MainAxisAlignment mainAxisAlignment;
-  final String? hintCharacter;
-  final void Function(String)? onCompleted;
-  final double borderRadius;
-  final PinCodeFieldShape shape;
-  final EdgeInsetsGeometry? fieldOuterPadding;
-  final double fieldHeight;
   final double fieldWidth;
+  final double fieldHeight;
+  final double borderRadius;
   final Color? fillColor;
   final Color? borderColor;
   final Color? activeColor;
   final Color? cursorColor;
-  final Function? onTap;
-  final String? Function(String?)? validator;
-  final StreamController<ErrorAnimationType>? errorAnimationController;
-  final TextDirection errorTextDirection;
   final TextStyle? textStyle;
   final TextStyle? hintStyle;
+  final VoidCallback? onTap;
+  final MaterialPinTheme? theme;
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
+  final ValueChanged<String>? onCompleted;
 
   @override
-  Widget build(BuildContext context) => PinCodeTextField(
-        controller: controller,
-        appContext: navigatorKey.currentContext!,
-        length: length,
-        cursorColor: cursorColor,
-        onTap: onTap,
-        autoFocus: autoFocus,
-        mainAxisAlignment: mainAxisAlignment,
-        hintCharacter: hintCharacter,
-        validator: validator,
-        errorAnimationController: errorAnimationController,
-        errorTextSpace: 20,
-        errorTextDirection: errorTextDirection,
-        textStyle: textStyle,
-        pastedTextStyle: textStyle,
-        hintStyle: hintStyle,
-        pinTheme: PinTheme(
-          shape: shape,
-          fieldOuterPadding: fieldOuterPadding,
-          borderRadius: BorderRadius.circular(borderRadius),
-          fieldHeight: fieldHeight,
-          fieldWidth: fieldWidth,
-          activeFillColor: fillColor,
-          inactiveFillColor: fillColor,
-          selectedFillColor: fillColor,
-          inactiveColor: borderColor,
-          selectedColor: activeColor,
-          activeColor: activeColor,
-          borderWidth: 1,
-          activeBorderWidth: 1,
-          errorBorderWidth: 1,
-          inactiveBorderWidth: 1,
-          disabledBorderWidth: 1,
+  Widget build(BuildContext context) {
+    return MaterialPinFormField(
+      length: length,
+      pinController: pinController,
+      autoFocus: autoFocus,
+      enableAutofill: true,
+      autofillHints: const [
+        AutofillHints.oneTimeCode,
+      ],
+      keyboardType: keyboardType ?? const TextInputType.numberWithOptions(signed: false, decimal: false),
+      onTapOutside: (event) => FocusManager.instance.primaryFocus!.unfocus(),
+      validator: validator,
+      onTap: onTap,
+      onCompleted: onCompleted,
+      theme: theme ?? MaterialPinTheme(
+        shape: MaterialPinShape.outlined,
+        cellSize: Size(
+          fieldWidth,
+          fieldHeight,
         ),
-        enableActiveFill: true,
-        backgroundColor: Colors.transparent,
-        keyboardType: TextInputType.number,
-        onCompleted: onCompleted,
-        onChanged: (final _) {},
-      ).ltr();
+        borderRadius: BorderRadius.circular(
+          borderRadius,
+        ),
+        borderColor: borderColor,
+        focusedBorderColor: activeColor,
+        fillColor: fillColor,
+        focusedFillColor: fillColor,
+        filledFillColor: fillColor,
+        textStyle: textStyle,
+        cursorColor: cursorColor,
+      ),
+    ).ltr();
+  }
 }
 
 Widget radioListTile<T>({

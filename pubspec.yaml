@@ -46,7 +46,7 @@ dependencies:
   syncfusion_flutter_barcodes: ^31.2.18
   syncfusion_flutter_pdfviewer: ^31.2.18
   syncfusion_flutter_signaturepad: ^31.2.18
-  pin_code_fields: ^8.0.1
+  pin_code_fields: ^9.4.0
   slide_countdown: ^2.0.2
   screenshot: ^3.0.0
   screen_protector: ^1.4.13
