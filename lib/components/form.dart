@@ -118,7 +118,8 @@ class _UTextFormFieldState extends State<UTextFormField> {
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
       autovalidateMode: widget.autovalidateMode,
-      textDirection: widget.textDirection ??
+      textDirection:
+          widget.textDirection ??
           (widget.keyboardType == TextInputType.number ||
                   widget.keyboardType == TextInputType.visiblePassword ||
                   widget.keyboardType == TextInputType.emailAddress ||
@@ -126,7 +127,8 @@ class _UTextFormFieldState extends State<UTextFormField> {
                   widget.keyboardType == TextInputType.phone
               ? TextDirection.ltr
               : null),
-      inputFormatters: widget.formatters ??
+      inputFormatters:
+          widget.formatters ??
           [
             // NoLeadingSpaceInputFormatter(),
 
@@ -160,7 +162,8 @@ class _UTextFormFieldState extends State<UTextFormField> {
         fillColor: context.theme.dividerColor.withAlpha(50),
         filled: !widget.enabled,
         labelText: widget.labelText != null ? "${widget.labelText}${widget.required ? '*' : ''}" : null,
-        labelStyle: widget.hintStyle ??
+        labelStyle:
+            widget.hintStyle ??
             context.textTheme.bodyMedium!.copyWith(
               fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2,
               color: context.theme.hintColor,
@@ -172,7 +175,8 @@ class _UTextFormFieldState extends State<UTextFormField> {
         helperText: widget.helperText,
         helperMaxLines: widget.helperMaxLines,
         hintText: widget.hintText,
-        hintStyle: widget.hintStyle ??
+        hintStyle:
+            widget.hintStyle ??
             context.textTheme.bodyMedium!.copyWith(
               fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2,
               color: context.theme.hintColor,
@@ -190,14 +194,18 @@ class _UTextFormFieldState extends State<UTextFormField> {
               )
             : widget.suffixIcon,
         suffixText: widget.suffixText,
-        suffixStyle: widget.suffixStyle ?? context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
+        suffixStyle:
+            widget.suffixStyle ??
+            context.textTheme.bodyMedium!.copyWith(fontSize: (context.textTheme.bodyMedium!.fontSize ?? 12) + 2),
         prefix: widget.prefix,
         prefixIcon: widget.prefixIcon,
         prefixText: widget.prefixText,
         prefixStyle: widget.prefixStyle,
         border: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
         enabledBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
-        disabledBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
+        disabledBorder: widget.borderColor != null
+            ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!))
+            : null,
         errorBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
         focusedBorder: widget.borderColor != null ? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor!)) : null,
       ),
@@ -262,84 +270,85 @@ class _UTextFieldPersianDatePickerState extends State<UTextFieldPersianDatePicke
 
   @override
   Widget build(BuildContext context) => UTextFormField(
-        controller: widget.controller,
-        prefix: widget.prefix,
-        suffix: widget.suffix,
-        labelText: widget.labelText,
-        fontSize: widget.fontSize,
-        hintText: widget.hintText,
-        textAlign: widget.textAlign,
-        readOnly: true,
-        textHeight: widget.textHeight,
-        validator: widget.validator,
-        onTap: () async {
-          if (!widget.readOnly) {
-            if (widget.date) {
-              UNavigator.bottomSheet(
-                  child: Column(
-                    children: [
-                      LinearDatePicker(
-                        startDate: "1330/01/01",
-                        endDate: "1406/12/30",
-                        initialDate: "${jalali.year}/${jalali.month}/${jalali.day}",
-                        addLeadingZero: true,
-                        dateChangeListener: (String selectedDate) {
-                          jalali = Jalali(
-                            selectedDate.getYear(),
-                            selectedDate.getMonth(),
-                            selectedDate.getDay(),
-                          );
-                        },
-                        showDay: true,
-                        yearText: "سال",
-                        monthText: "ماه",
-                        dayText: "روز",
-                        showLabels: true,
-                        columnWidth: 100,
-                        showMonthName: true,
-                        isJalaali: true,
-                      ),
-                      Row(
-                        children: [
-                          UElevatedButton(
-                            title: widget.submitButtonText,
-                            onTap: () {
-                              setState(() {});
-                              widget.onChange(jalali.toDateTime(), jalali);
-                              UNavigator.back();
-                            },
-                          ).expanded(),
-                          const SizedBox(width: 12),
-                          UElevatedButton(
-                            title: widget.cancelButtonText,
-                            backgroundColor: Theme.of(context).colorScheme.primary,
-                            onTap: () => UNavigator.back(),
-                          ).expanded(),
-                        ],
-                      ).pOnly(top: 24, bottom: 12),
-                    ],
-                  ),
-                  onDismiss: () async {
-                    if (widget.time) {
-                      TimeOfDay? timeOfDay = await showTimePicker(
-                        context: context,
-                        initialTime: const TimeOfDay(hour: 0, minute: 0),
-                      );
-                      jalali = Jalali(
-                        jalali.year,
-                        jalali.month,
-                        jalali.day,
-                        timeOfDay!.hour,
-                        timeOfDay.minute,
-                      );
-                      setState(() => jalali = jalali);
-                      widget.onChange(jalali.toDateTime(), jalali);
-                    }
-                  });
-            }
-          }
-        },
-      );
+    controller: widget.controller,
+    prefix: widget.prefix,
+    suffix: widget.suffix,
+    labelText: widget.labelText,
+    fontSize: widget.fontSize,
+    hintText: widget.hintText,
+    textAlign: widget.textAlign,
+    readOnly: true,
+    textHeight: widget.textHeight,
+    validator: widget.validator,
+    onTap: () async {
+      if (!widget.readOnly) {
+        if (widget.date) {
+          UNavigator.bottomSheet(
+            child: Column(
+              children: [
+                LinearDatePicker(
+                  startDate: "1330/01/01",
+                  endDate: "1406/12/30",
+                  initialDate: "${jalali.year}/${jalali.month}/${jalali.day}",
+                  addLeadingZero: true,
+                  dateChangeListener: (String selectedDate) {
+                    jalali = Jalali(
+                      selectedDate.getYear(),
+                      selectedDate.getMonth(),
+                      selectedDate.getDay(),
+                    );
+                  },
+                  showDay: true,
+                  yearText: "سال",
+                  monthText: "ماه",
+                  dayText: "روز",
+                  showLabels: true,
+                  columnWidth: 100,
+                  showMonthName: true,
+                  isJalaali: true,
+                ),
+                Row(
+                  children: [
+                    UElevatedButton(
+                      title: widget.submitButtonText,
+                      onTap: () {
+                        setState(() {});
+                        widget.onChange(jalali.toDateTime(), jalali);
+                        UNavigator.back();
+                      },
+                    ).expanded(),
+                    const SizedBox(width: 12),
+                    UElevatedButton(
+                      title: widget.cancelButtonText,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      onTap: () => UNavigator.back(),
+                    ).expanded(),
+                  ],
+                ).pOnly(top: 24, bottom: 12),
+              ],
+            ),
+            onDismiss: () async {
+              if (widget.time) {
+                TimeOfDay? timeOfDay = await showTimePicker(
+                  context: context,
+                  initialTime: const TimeOfDay(hour: 0, minute: 0),
+                );
+                jalali = Jalali(
+                  jalali.year,
+                  jalali.month,
+                  jalali.day,
+                  timeOfDay!.hour,
+                  timeOfDay.minute,
+                );
+                setState(() => jalali = jalali);
+                widget.onChange(jalali.toDateTime(), jalali);
+              }
+            },
+          );
+        }
+      }
+    },
+  );
 }
 
 class UElevatedButton extends StatelessWidget {
@@ -384,58 +393,61 @@ class UElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-        style: ButtonStyle(
-          textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
-          backgroundColor: WidgetStateProperty.all(
-            enable ? (backgroundColor ?? navigatorKey.currentContext!.theme.primaryColor) : navigatorKey.currentContext!.theme.disabledColor,
-          ),
-          padding: WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: horizontalPadding ?? 12)),
-          shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 12),
-              side: borderWidth != null ? BorderSide(width: borderWidth ?? 1, color: borderColor) : BorderSide.none,
-            ),
-          ),
+    style: ButtonStyle(
+      textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
+      backgroundColor: WidgetStateProperty.all(
+        enable
+            ? (backgroundColor ?? navigatorKey.currentContext!.theme.primaryColor)
+            : navigatorKey.currentContext!.theme.disabledColor,
+      ),
+      padding: WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: horizontalPadding ?? 12)),
+      shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 12),
+          side: borderWidth != null ? BorderSide(width: borderWidth ?? 1, color: borderColor) : BorderSide.none,
         ),
-        onPressed: enable && !isLoading ? onTap : null,
-        child: Container(
-          constraints: BoxConstraints(
-            minWidth: width ?? 100,
-            maxWidth: width ?? context.width,
-            minHeight: height ?? 40,
-            maxHeight: height ?? 40,
-          ),
-          child: Center(
-            widthFactor: 1,
-            heightFactor: 1,
-            child: isLoading
-                ? SizedBox(
-                    width: 15,
-                    height: 15,
-                    child: CircularProgressIndicator(
-                      color: progressIndicatorColor ?? Colors.white,
-                      strokeCap: StrokeCap.round,
-                      strokeWidth: progressIndicatorStrokeWidth ?? 3.0,
-                    ),
-                  )
-                : Row(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 6,
-                    children: [
-                      if (icon != null) icon!,
-                      Flexible(
-                        child: titleWidget ??
-                            Text(
-                              title ?? '',
-                              textAlign: TextAlign.center,
-                              maxLines: 1,
-                            ).bodyMedium(color: titleColor ?? Colors.white, overflow: TextOverflow.ellipsis),
-                      ),
-                    ],
+      ),
+    ),
+    onPressed: enable && !isLoading ? onTap : null,
+    child: Container(
+      constraints: BoxConstraints(
+        minWidth: width ?? 100,
+        maxWidth: width ?? context.width,
+        minHeight: height ?? 40,
+        maxHeight: height ?? 40,
+      ),
+      child: Center(
+        widthFactor: 1,
+        heightFactor: 1,
+        child: isLoading
+            ? SizedBox(
+                width: 15,
+                height: 15,
+                child: CircularProgressIndicator(
+                  color: progressIndicatorColor ?? Colors.white,
+                  strokeCap: StrokeCap.round,
+                  strokeWidth: progressIndicatorStrokeWidth ?? 3.0,
+                ),
+              )
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                spacing: 6,
+                children: [
+                  if (icon != null) icon!,
+                  Flexible(
+                    child:
+                        titleWidget ??
+                        Text(
+                          title ?? '',
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                        ).bodyMedium(color: titleColor ?? Colors.white, overflow: TextOverflow.ellipsis),
                   ),
-          ),
-        ),
-      );
+                ],
+              ),
+      ),
+    ),
+  );
 }
 
 class UOutlinedButton extends StatelessWidget {
@@ -462,17 +474,17 @@ class UOutlinedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OutlinedButton(
-        style: ButtonStyle(
-          textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
-          padding: WidgetStateProperty.all(padding),
-        ),
-        onPressed: onTap,
-        child: SizedBox(
-          height: height,
-          width: width ?? MediaQuery.sizeOf(navigatorKey.currentContext!).width,
-          child: Center(child: titleWidget ?? Text(title ?? '', textAlign: TextAlign.center)),
-        ),
-      );
+    style: ButtonStyle(
+      textStyle: textStyle == null ? null : WidgetStatePropertyAll<TextStyle>(textStyle!),
+      padding: WidgetStateProperty.all(padding),
+    ),
+    onPressed: onTap,
+    child: SizedBox(
+      height: height,
+      width: width ?? MediaQuery.sizeOf(navigatorKey.currentContext!).width,
+      child: Center(child: titleWidget ?? Text(title ?? '', textAlign: TextAlign.center)),
+    ),
+  );
 }
 
 class UTextFieldTypeAhead<T> extends StatelessWidget {
@@ -511,33 +523,34 @@ class UTextFieldTypeAhead<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          TypeAheadField<T>(
-            hideKeyboardOnDrag: hideKeyboard,
-            suggestionsCallback: suggestionsCallback,
-            builder: (final BuildContext _, final TextEditingController __, final FocusNode ___) => UTextFormField(
-              onTap: onTap,
-              validator: validator,
-              prefix: prefix,
-              isDense: isDense,
-              contentPadding: contentPadding,
-              onChanged: onChanged,
-              hintText: hintText,
-              labelText: labelText,
-              suffix: suffix,
-              controller: controller,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      TypeAheadField<T>(
+        hideKeyboardOnDrag: hideKeyboard,
+        suggestionsCallback: suggestionsCallback,
+        builder: (final BuildContext _, final TextEditingController __, final FocusNode ___) => UTextFormField(
+          onTap: onTap,
+          validator: validator,
+          prefix: prefix,
+          isDense: isDense,
+          contentPadding: contentPadding,
+          onChanged: onChanged,
+          hintText: hintText,
+          labelText: labelText,
+          suffix: suffix,
+          controller: controller,
+        ),
+        itemBuilder:
+            itemBuilder ??
+            (final BuildContext context, final Object? suggestion) => Container(
+              margin: const EdgeInsets.all(4),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+              child: Text(suggestion.toString()),
             ),
-            itemBuilder: itemBuilder ??
-                (final BuildContext context, final Object? suggestion) => Container(
-                      margin: const EdgeInsets.all(4),
-                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                      child: Text(suggestion.toString()),
-                    ),
-            onSelected: onSuggestionSelected,
-          ),
-        ],
-      );
+        onSelected: onSuggestionSelected,
+      ),
+    ],
+  );
 }
 
 class UOtpField extends StatelessWidget {
@@ -560,6 +573,7 @@ class UOtpField extends StatelessWidget {
     this.onTap,
     this.theme,
     this.keyboardType,
+    this.hintCharacter,
   });
 
   final PinInputController pinController;
@@ -577,6 +591,7 @@ class UOtpField extends StatelessWidget {
   final VoidCallback? onTap;
   final MaterialPinTheme? theme;
   final TextInputType? keyboardType;
+  final String? hintCharacter;
   final String? Function(String?)? validator;
   final ValueChanged<String>? onCompleted;
 
@@ -590,28 +605,31 @@ class UOtpField extends StatelessWidget {
       autofillHints: const [
         AutofillHints.oneTimeCode,
       ],
+      hintCharacter: hintCharacter,
       keyboardType: keyboardType ?? const TextInputType.numberWithOptions(signed: false, decimal: false),
       onTapOutside: (event) => FocusManager.instance.primaryFocus!.unfocus(),
       validator: validator,
       onTap: onTap,
       onCompleted: onCompleted,
-      theme: theme ?? MaterialPinTheme(
-        shape: MaterialPinShape.outlined,
-        cellSize: Size(
-          fieldWidth,
-          fieldHeight,
-        ),
-        borderRadius: BorderRadius.circular(
-          borderRadius,
-        ),
-        borderColor: borderColor,
-        focusedBorderColor: activeColor,
-        fillColor: fillColor,
-        focusedFillColor: fillColor,
-        filledFillColor: fillColor,
-        textStyle: textStyle,
-        cursorColor: cursorColor,
-      ),
+      theme:
+          theme ??
+          MaterialPinTheme(
+            shape: MaterialPinShape.outlined,
+            cellSize: Size(
+              fieldWidth,
+              fieldHeight,
+            ),
+            borderRadius: BorderRadius.circular(
+              borderRadius,
+            ),
+            borderColor: borderColor,
+            focusedBorderColor: activeColor,
+            fillColor: fillColor,
+            focusedFillColor: fillColor,
+            filledFillColor: fillColor,
+            textStyle: textStyle,
+            cursorColor: cursorColor,
+          ),
     ).ltr();
   }
 }
