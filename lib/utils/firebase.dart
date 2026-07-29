@@ -3,10 +3,6 @@ import 'package:u/utilities.dart';
 class UFirebase {
   UFirebase._();
 
-  static StreamSubscription<RemoteMessage>? _onMessageSubscription;
-  static StreamSubscription<RemoteMessage>? _onMessageOpenedAppSubscription;
-  static StreamSubscription<String>? _onTokenRefreshSubscription;
-
   static bool _initialized = false;
 
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -65,7 +61,7 @@ class UFirebase {
       }
     });
 
-    _onMessageSubscription = FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       if (message.notification != null) {
         // await _showNotification(message);
         await UNotification.showLocalNotification(
@@ -78,14 +74,14 @@ class UFirebase {
       }
     });
 
-    _onMessageOpenedAppSubscription = FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       if (kDebugMode) {
         print("Notification clicked!");
       }
       onMessageOpenedApp(message);
     });
 
-    _onTokenRefreshSubscription = FirebaseMessaging.instance.onTokenRefresh.listen((String token) {
+    FirebaseMessaging.instance.onTokenRefresh.listen((String token) {
       UCore.fcmToken = token;
       // send token to backend
       onTokenRefresh(token);
@@ -181,18 +177,6 @@ class UFirebase {
     }
 
     return success;
-  }
-
-  static Future<void> dispose() async {
-    await _onMessageSubscription?.cancel();
-    await _onMessageOpenedAppSubscription?.cancel();
-    await _onTokenRefreshSubscription?.cancel();
-
-    _onMessageSubscription = null;
-    _onMessageOpenedAppSubscription = null;
-    _onTokenRefreshSubscription = null;
-
-    _initialized = false;
   }
 
 // Initialize Local Notifications
