@@ -12,11 +12,12 @@ class UFirebase {
   // }
 
   /// use [setupFirebaseMessaging] in main Rout page
-  static void setupFirebaseMessaging({
+  static Future<void> setupFirebaseMessaging({
     required String channelId,
     required String channelName,
     required String? icon,
     required Function(RemoteMessage message) onMessageOpenedApp,
+    required Function(String token) onTokenRefresh,
     required Future<void> Function(RemoteMessage message) onBackgroundMessageReceive,
     Function(RemoteMessage message)? onReceiveNotificationWhenInApp,
   }) async {
@@ -74,6 +75,12 @@ class UFirebase {
       }
       onMessageOpenedApp(message);
     });
+
+    FirebaseMessaging.instance.onTokenRefresh.listen((String token) {
+      UCore.fcmToken = token;
+      // send token to backend
+      onTokenRefresh(token);
+    });
   }
 
   /// Get FCM token with retry logic and error handling
@@ -120,7 +127,7 @@ class UFirebase {
           }
           throw Exception("FCM token is null or empty");
         }
-      } catch (e) {
+      } catch (e, stack) {
         final errorMessage = e.toString();
         final isServiceNotAvailable =
             errorMessage.contains('SERVICE_NOT_AVAILABLE') || errorMessage.contains('SERVICE_NOT_AVAILABLE') || errorMessage.contains('IOException');
@@ -146,7 +153,7 @@ class UFirebase {
           try {
             FirebaseCrashlytics.instance.recordError(
               e,
-              StackTrace.current,
+              stack,
               reason: 'Failed to get FCM token after $attempt attempts',
             );
           } catch (_) {
