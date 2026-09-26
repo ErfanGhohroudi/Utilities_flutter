@@ -37,7 +37,9 @@ class UFirebase {
 
     if (kDebugMode) {
       print(
-        settings.authorizationStatus == AuthorizationStatus.authorized ? "User granted permission" : "User declined or has not granted permission",
+        settings.authorizationStatus == AuthorizationStatus.authorized
+            ? "User granted permission"
+            : "User declined or has not granted permission",
       );
     }
 
@@ -119,7 +121,6 @@ class UFirebase {
 
         // Get FCM token
         String? token = await messaging.getToken();
-
         if (token != null && token.isNotEmpty) {
           if (kDebugMode) {
             print("Firebase Messaging Token retrieved successfully: $token");
@@ -135,7 +136,9 @@ class UFirebase {
       } catch (e, stack) {
         final errorMessage = e.toString();
         final isServiceNotAvailable =
-            errorMessage.contains('SERVICE_NOT_AVAILABLE') || errorMessage.contains('SERVICE_NOT_AVAILABLE') || errorMessage.contains('IOException');
+            errorMessage.contains('SERVICE_NOT_AVAILABLE') ||
+            errorMessage.contains('SERVICE_NOT_AVAILABLE') ||
+            errorMessage.contains('IOException');
 
         if (kDebugMode) {
           print("Error getting FCM token (attempt $attempt/$maxRetries): $errorMessage");
@@ -179,7 +182,7 @@ class UFirebase {
     return success;
   }
 
-// Initialize Local Notifications
+  // Initialize Local Notifications
   static Future<void> initializeNotifications({
     required String channelId,
     required String channelName,
@@ -216,6 +219,18 @@ class UFirebase {
       importance: Importance.max,
     );
 
-    await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+    // Check if app was launched by tapping a local notification (Cold Start / Terminated state)
+    final notificationAppLaunchDetails = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+    if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
+      final notificationResponse = notificationAppLaunchDetails?.notificationResponse;
+      if (notificationResponse != null) {
+        Future.delayed(const Duration(milliseconds: 800), () {
+          onNotificationTap(notificationResponse);
+        });
+      }
+    }
   }
 }
